@@ -1,12 +1,12 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.0
+                      Capture SDK Version 1.0.32
 
 
                             Socket Mobile, Inc.
                            www.socketmobile.com
 
-               © Copyright 2017 all rights reserved worldwide
+               © Copyright 2018 Socket Mobile, Inc.
 ================================================================================
 
 
@@ -51,6 +51,20 @@ This creates a workspace file. If you have Xcode open on your project, you need
 to close it, and open your project workspace file.
 
 From there you should be able to compile without error.
+
+VERY IMPORTANT: External Accessory Protocol String
+In order to be able to use the Socket Mobile barcode scanners, the scanners
+protocol string needs to be added in the application project info.
+The protocol string is "com.socketmobile.chs".
+
+If the application does not use any barcode scanner but only the contactless
+reader/writer (Socket Mobile D600), there is no need to specify a protocol
+string because the D600 uses Bluetooth Low Energy (BLE).
+
+If the application does use a Socket Mobile barcode scanner it will need to be
+whitelisted before submitting the application in the App Store. Please contact
+Socket Mobile in order to register the application to the whitelist. This has
+to be done once for the first version supporting the barcode scanner.
 
 Now you're ready to add "import SKTCapture" in your main controller, and
 make it derive from one of the CaptureHelperDelegate that your application
@@ -301,3 +315,13 @@ the same information than as any other scanners supported by Capture.
 
 Appendix A. Changes log
 -----------------------
+1.0.0
+  . initial commit
+
+1.0.32
+  . Fix the AppKey verification
+
+  . Fix the inline comment to display correctly in Xcode help
+
+  . Fix a bug when enabling SoftScan at the same than enabling/disabling D600
+  support.

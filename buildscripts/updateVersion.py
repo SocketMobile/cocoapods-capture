@@ -5,18 +5,18 @@ import glob
 import time
 import subprocess
 
-def updateVersionFiles(files, newVersion):
+def updateVersionFiles(files, newVersion, versionPrefix):
     year = time.strftime('%Y')
-    regexVersion = '\d*\.\d*\.\d*'
-    regexYear = 'Copyright \d\w all'
+    regexVersion = versionPrefix + '\d*\.\d*\.\d*'
+    regexYear = 'Copyright \d\w+ Socket'
     for file in files:
         print 'updating the version in the ' + file + ' to ' + newVersion
         with open(file, 'r') as src:
             trg = open(file + '-new', 'w')
             lines = src.readlines()
             for line in lines:
-                line = re.sub(regexVersion, newVersion, line)
-                line = re.sub(regexYear, 'Copyright ' + year + ' all', line)
+                line = re.sub(regexVersion, versionPrefix + newVersion, line)
+                line = re.sub(regexYear, 'Copyright ' + year + ' Socket', line)
                 trg.write(line)
             trg.close()
         os.remove(file)
@@ -24,9 +24,9 @@ def updateVersionFiles(files, newVersion):
 
 def updateFiles(targetDirectory, newVersion):
     files = glob.glob(targetDirectory + '/*.txt')
-    updateVersionFiles(files, newVersion)
+    updateVersionFiles(files, newVersion, 'Version ')
     files = glob.glob(targetDirectory + '/*.podspec')
-    updateVersionFiles(files, newVersion)
+    updateVersionFiles(files, newVersion, '')
 
 def getCurrentDir():
     nbParam = len(sys.argv)
@@ -74,8 +74,13 @@ def tagSourceControl(version):
     output = subprocess.check_output(['git','tag', '-a', version, '-m', 'update version'])
 
 def main():
+    if (len(sys.argv) != 2):
+        print 'should have the new version as argument:'
+        print 'example: python updateVersion.py 1.0.28'
+        return
+    newVersion = sys.argv[1]
     target = getCurrentDir()
-    newVersion = getFullVersion(target)
+    # newVersion = getFullVersion(target)
     updateFiles(target + '/..', newVersion)
     commitModifications(newVersion)
     tagSourceControl(newVersion)

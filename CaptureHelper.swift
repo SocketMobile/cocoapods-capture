@@ -1005,7 +1005,9 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                     }
                 }
                 capture.close(completionHandler: { (result) in
-                    print("closing the device returns \(result.rawValue)")
+                    if (result != SKTCaptureErrors.E_NOERROR) {
+                        print("closing the device returns \(result.rawValue)")
+                    }
                 })
             }
             break
@@ -1045,7 +1047,9 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                 }
                 self.deviceManagers.removeValue(forKey: capture)
                 capture.close(completionHandler: { (result) in
-                    print("closing the device manager returns \(result.rawValue)")
+                    if (result != SKTCaptureErrors.E_NOERROR) {
+                        print("closing the device manager returns \(result.rawValue)")
+                    }
                 })
             }
             break
@@ -1270,7 +1274,7 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
             property.id = .softScanStatus
             property.type = .byte
             property.byteValue = Int8(status.rawValue)
-            cap.getProperty(property) { (result, propertyResult) in
+            cap.setProperty(property) { (result, propertyResult) in
                 if let dq = self.delegateDispatchQueue as DispatchQueue! {
                     dq.async{
                         completion(result)

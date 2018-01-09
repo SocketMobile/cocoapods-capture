@@ -16,8 +16,10 @@
  @brief device type class
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceClass) {
-    SKTCaptureDeviceTypeClassDevice, /** the device belongs to the device class */
-    SKTCaptureDeviceTypeClassDeviceManager /** the device belongs to the device manager class */
+    /** the device belongs to the device class */
+    SKTCaptureDeviceTypeClassDevice,
+    /** the device belongs to the device manager class */
+    SKTCaptureDeviceTypeClassDeviceManager
 };
 
 /**
@@ -25,12 +27,18 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceClass) {
 
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceInterfaceType) {
-    SKTCaptureDeviceInterfaceTypeNone = 0, /** interface not specified */
-    SKTCaptureDeviceInterfaceTypeSD = 1, /** interface Secure Digital */
-    SKTCaptureDeviceInterfaceTypeCF = 2, /** interface Compact Flash */
-    SKTCaptureDeviceInterfaceTypeBluetooth = 3, /** interface Bluetooth */
-    SKTCaptureDeviceInterfaceTypeSerial = 4, /** interface Serial */
-    SKTCaptureDeviceInterfaceTypeBle = 5 /** interface BLE */
+    /** interface not specified */
+    SKTCaptureDeviceInterfaceTypeNone = 0,
+    /** interface Secure Digital */
+    SKTCaptureDeviceInterfaceTypeSD = 1,
+    /** interface Compact Flash */
+    SKTCaptureDeviceInterfaceTypeCF = 2,
+    /** interface Bluetooth */
+    SKTCaptureDeviceInterfaceTypeBluetooth = 3,
+    /** interface Serial */
+    SKTCaptureDeviceInterfaceTypeSerial = 4,
+    /** interface BLE */
+    SKTCaptureDeviceInterfaceTypeBle = 5
 };
 
 /**
@@ -39,28 +47,44 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceInterfaceType) {
 
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceProductId) {
-    SKTCaptureDeviceProductIdNone, /** no product type speficied */
-    SKTCaptureDeviceProductId7Series, /** product of the 7 Series */
-    SKTCaptureDeviceProductId7xSeries, /** product of the 7x Series */
-    SKTCaptureDeviceProductId9Series, /** product of the 9 Series */
-    SKTCaptureDeviceProductId7xiSeries, /** product of the 7xi Series */
-    SKTCaptureDeviceProductIdSoftScan, /** product of SoftScan type */
-    SKTCaptureDeviceProductId8ciSeries, /** product of 8ci Series */
-    SKTCaptureDeviceProductId8qiSeries, /** product of 8qi Series */
-    SKTCaptureDeviceProductIdD700Series, /** product of D700 Series */
-    SKTCaptureDeviceProductIdD730Series, /** product of D730 Series */
-    SKTCaptureDeviceProductIdD750Series, /** product of the D750 Series */
-    SKTCaptureDeviceProductIdD600Series, /** product of the D600 Series */
-    SKTCaptureDeviceProductIdUnknown /** product unknown */
+    /** no product type speficied */
+    SKTCaptureDeviceProductIdNone,
+    /** product of the 7 Series */
+    SKTCaptureDeviceProductId7Series,
+    /** product of the 7x Series */
+    SKTCaptureDeviceProductId7xSeries,
+    /** product of the 9 Series */
+    SKTCaptureDeviceProductId9Series,
+    /** product of the 7xi Series */
+    SKTCaptureDeviceProductId7xiSeries,
+    /** product of SoftScan type */
+    SKTCaptureDeviceProductIdSoftScan,
+    /** product of 8ci Series */
+    SKTCaptureDeviceProductId8ciSeries,
+    /** product of 8qi Series */
+    SKTCaptureDeviceProductId8qiSeries,
+    /** product of D700 Series */
+    SKTCaptureDeviceProductIdD700Series,
+    /** product of D730 Series */
+    SKTCaptureDeviceProductIdD730Series,
+    /** product of the D750 Series */
+    SKTCaptureDeviceProductIdD750Series,
+    /** product of the D600 Series */
+    SKTCaptureDeviceProductIdD600Series,
+    /** product unknown */
+    SKTCaptureDeviceProductIdUnknown
 };
 
 /**
  @brief Identifier for the Device Managers
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceManagerId) {
-    SKTCaptureDeviceManagerIdNone,/** no device manager - regular device */
-    SKTCaptureDeviceManagerIdBle, /** BLE device manager */
-    SKTCaptureDeviceManagerIdUnknown /** unknown device manager, does Capture need to be updated? */
+    /** no device manager - regular device */
+    SKTCaptureDeviceManagerIdNone,
+    /** BLE device manager */
+    SKTCaptureDeviceManagerIdBle,
+    /** unknown device manager, does Capture need to be updated? */
+    SKTCaptureDeviceManagerIdUnknown
 };
 
 /**
@@ -69,34 +93,47 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceManagerId) {
 
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceType) {
+    /** unknown device type */
     SKTCaptureDeviceTypeNone =
-    SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdNone, /** unknown device type */
+    SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdNone,
+    /** Scanner 7 device type */
     SKTCaptureDeviceTypeScanner7 =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7Series, /** Scanner 7 device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7Series,
+    /** Scanner 7x device type */
     SKTCaptureDeviceTypeScanner7x =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xSeries, /** Scanner 7x device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xSeries,
+    /** Scanner 7xi device type */
     SKTCaptureDeviceTypeScanner7xi =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xiSeries, /** Scanner 7xi device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xiSeries,
+    /** Scanner 9 device type */
     SKTCaptureDeviceTypeScanner9 =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId9Series, /** Scanner 9 device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId9Series,
+    /** SoftScan device type */
     SKTCaptureDeviceTypeSoftScan =
-    SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdSoftScan, /** SoftScan device type */
+    SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdSoftScan,
+    /** Scanner 8ci device type */
     SKTCaptureDeviceTypeScanner8ci =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8ciSeries, /** Scanner 8ci device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8ciSeries,
+    /** Scanner 8qi device type */
     SKTCaptureDeviceTypeScanner8qi =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8qiSeries, /** Scanner 8qi device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8qiSeries,
+    /** Scanner D700 device type */
     SKTCaptureDeviceTypeScannerD700 =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD700Series, /** Scanner D700 device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD700Series,
+    /** Scanner D730 device type */
     SKTCaptureDeviceTypeScannerD730 =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD730Series, /** Scanner D730 device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD730Series,
+    /** Scanner D750 device type */
     SKTCaptureDeviceTypeScannerD750 =
-    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD750Series, /** Scanner D750 device type */
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD750Series,
+    /** Scanner D600 device type */
     SKTCaptureDeviceTypeScannerD600 = SKTCaptureDeviceTypeClassDevice<<24 |
-    SKTCaptureDeviceInterfaceTypeBle<<16 | SKTCaptureDeviceProductIdD600Series,/** Scanner D600 device type */
+    SKTCaptureDeviceInterfaceTypeBle<<16 | SKTCaptureDeviceProductIdD600Series,
 
     // device Manager
+    /** BLE Device Manager type */
     SKTCaptureDeviceManagerTypeBle = SKTCaptureDeviceTypeClassDeviceManager<<24 |
-    SKTCaptureDeviceInterfaceTypeBle<<16 | SKTCaptureDeviceManagerIdBle, /** BLE Device Manager type */
+    SKTCaptureDeviceInterfaceTypeBle<<16 | SKTCaptureDeviceManagerIdBle,
 
 };
 
@@ -107,10 +144,14 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceType) {
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmation)
 {
-    SKTCaptureDataConfirmationModeOff, /** use the device configuration (Local Confirmation or App) */
-    SKTCaptureDataConfirmationModeDevice, /** the device confirms the decoded data locally */
-    SKTCaptureDataConfirmationModeCapture, /** Capture confirms the decoded data as it receives them and there is one app */
-    SKTCaptureDataConfirmationModeApp /** the Application confirms the decoded data as it receives them */
+    /** use the device configuration (Local Confirmation or App) */
+    SKTCaptureDataConfirmationModeOff,
+    /** the device confirms the decoded data locally */
+    SKTCaptureDataConfirmationModeDevice,
+    /** Capture confirms the decoded data as it receives them and there is one app */
+    SKTCaptureDataConfirmationModeCapture,
+    /** the Application confirms the decoded data as it receives them */
+    SKTCaptureDataConfirmationModeApp
 };
 
 /**
@@ -119,8 +160,10 @@ typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmation)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceDataAcknowledgment)
 {
-    SKTCaptureDeviceDataAcknowledgmentOff, /** the device won't locally acknowledge decoded data */
-    SKTCaptureDeviceDataAcknowledgmentOn, /** the device will locally acknowledge decoded data */
+    /** the device won't locally acknowledge decoded data */
+    SKTCaptureDeviceDataAcknowledgmentOff,
+    /** the device will locally acknowledge decoded data */
+    SKTCaptureDeviceDataAcknowledgmentOn,
 };
 
 /**
@@ -129,9 +172,12 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceDataAcknowledgment)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureSecurityMode )
 {
-    SKTCaptureSecurityModeNone, /** no security */
-    SKTCaptureSecurityModeAuthentication, /** authentication only */
-    SKTCaptureSecurityModeAuthenticationEncryption, /** authentication and encryption */
+    /** no security */
+    SKTCaptureSecurityModeNone,
+    /** authentication only */
+    SKTCaptureSecurityModeAuthentication,
+    /** authentication and encryption */
+    SKTCaptureSecurityModeAuthenticationEncryption,
 };
 
 /**
@@ -141,11 +187,16 @@ typedef NS_ENUM (NSInteger, SKTCaptureSecurityMode )
  */
 typedef NS_ENUM (NSInteger, SKTCaptureTrigger )
 {
-    SKTCaptureTriggerStart=1, /** start a scan */
-    SKTCaptureTriggerStop, /** stop a scan */
-    SKTCaptureTriggerEnable, /** enable the trigger */
-    SKTCaptureTriggerDisable, /** disable the trigger */
-    SKTCaptureTriggerContinuousScan, /** start a scan in continuous mode (SoftScan scanner only, ESKT_NOTSUPPORTED returned when used with other scanner) */
+    /** start a scan */
+    SKTCaptureTriggerStart=1,
+    /** stop a scan */
+    SKTCaptureTriggerStop,
+    /** enable the trigger */
+    SKTCaptureTriggerEnable,
+    /** disable the trigger */
+    SKTCaptureTriggerDisable,
+    /** start a scan in continuous mode (SoftScan scanner only, ESKT_NOTSUPPORTED returned when used with other scanner) */
+    SKTCaptureTriggerContinuousScan,
 };
 
 /**
@@ -155,8 +206,10 @@ typedef NS_ENUM (NSInteger, SKTCaptureTrigger )
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeletePairing )
 {
-    SKTCaptureDeletePairingCurrent=0, /** delete only the current pairing information */
-    SKTCaptureDeletePairingAll=1, /** delete all the pairing information */
+    /** delete only the current pairing information */
+    SKTCaptureDeletePairingCurrent=0,
+    /** delete all the pairing information */
+    SKTCaptureDeletePairingAll=1,
 };
 
 /**
@@ -166,10 +219,14 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeletePairing )
  */
 typedef NS_ENUM (NSInteger, SKTCaptureSoundActionType)
 {
-    SKTCaptureSoundActionTypeGoodScan, /** good read from the host */
-    SKTCaptureSoundActionTypeGoodScanLocal, /** good read from the device */
-    SKTCaptureSoundActionTypeBadScan, /** bad read from the host */
-    SKTCaptureSoundActionTypeBadScanLocal, /** bad read from the device */
+    /** good read from the host */
+    SKTCaptureSoundActionTypeGoodScan,
+    /** good read from the device */
+    SKTCaptureSoundActionTypeGoodScanLocal,
+    /** bad read from the host */
+    SKTCaptureSoundActionTypeBadScan,
+    /** bad read from the device */
+    SKTCaptureSoundActionTypeBadScanLocal,
 };
 
 /**
@@ -179,11 +236,16 @@ typedef NS_ENUM (NSInteger, SKTCaptureSoundActionType)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureSoundFrequency)
 {
-    SKTCaptureSoundFrequencyNone=0, /** no frequency sound */
-    SKTCaptureSoundFrequencyLow, /** low frequency sound */
-    SKTCaptureSoundFrequencyMedium, /** medium frequency sound */
-    SKTCaptureSoundFrequencyHigh, /** high frequency sound */
-    SKTCaptureSoundFrequencyLast /** not a frequency sound value */
+    /** no frequency sound */
+    SKTCaptureSoundFrequencyNone=0,
+    /** low frequency sound */
+    SKTCaptureSoundFrequencyLow,
+    /** medium frequency sound */
+    SKTCaptureSoundFrequencyMedium,
+    /** high frequency sound */
+    SKTCaptureSoundFrequencyHigh,
+    /** not a frequency sound value */
+    SKTCaptureSoundFrequencyLast
 };
 
 /**
@@ -193,10 +255,14 @@ typedef NS_ENUM (NSInteger, SKTCaptureSoundFrequency)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureRumbleActionType)
 {
-    SKTCaptureRumbleActionTypeGoodScan, /** Vibrate when the host is ack'ing positively the decoded data */
-    SKTCaptureRumbleActionTypeGoodScanLocal, /** Vibrate when the device is ack'ing positively the decoded data */
-    SKTCaptureRumbleActionTypeBadScan, /** Vibrate when the host is ack'ing negatively the decoded data */
-    SKTCaptureRumbleActionTypeBadScanLocal /** Vibrate when the device ack'ing negatively the decoded data */
+    /** Vibrate when the host is ack'ing positively the decoded data */
+    SKTCaptureRumbleActionTypeGoodScan,
+    /** Vibrate when the device is ack'ing positively the decoded data */
+    SKTCaptureRumbleActionTypeGoodScanLocal,
+    /** Vibrate when the host is ack'ing negatively the decoded data */
+    SKTCaptureRumbleActionTypeBadScan,
+    /** Vibrate when the device ack'ing negatively the decoded data */
+    SKTCaptureRumbleActionTypeBadScanLocal
 };
 
 
@@ -208,10 +274,14 @@ typedef NS_ENUM (NSInteger, SKTCaptureRumbleActionType)
  */
 typedef NS_OPTIONS (NSInteger, SKTCaptureLocalDecodeAction)
 {
-    SKTCaptureLocalDecodeActionNone=0, /** no decode action when the device reads correctly */
-    SKTCaptureLocalDecodeActionBeep=1, /** the device beeps when it reads correctly */
-    SKTCaptureLocalDecodeActionFlash=2, /** the device LED flashes when it reads correctly */
-    SKTCaptureLocalDecodeActionRumble=4 /** the device vibrates when it reads correctly */
+    /** no decode action when the device reads correctly */
+    SKTCaptureLocalDecodeActionNone=0,
+    /** the device beeps when it reads correctly */
+    SKTCaptureLocalDecodeActionBeep=1,
+    /** the device LED flashes when it reads correctly */
+    SKTCaptureLocalDecodeActionFlash=2,
+    /** the device vibrates when it reads correctly */
+    SKTCaptureLocalDecodeActionRumble=4
 };
 
 /**
@@ -221,9 +291,12 @@ typedef NS_OPTIONS (NSInteger, SKTCaptureLocalDecodeAction)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationLed)
 {
-    SKTCaptureDataConfirmationLedNone=0, /** Device LED do nothing when confirming a read */
-    SKTCaptureDataConfirmationLedGreen=1, /** Device LED flashes in green when confirming a read */
-    SKTCaptureDataConfirmationLedRed=2 /** Device LED flashes in red when confirming a read */
+    /** Device LED do nothing when confirming a read */
+    SKTCaptureDataConfirmationLedNone=0,
+    /** Device LED flashes in green when confirming a read */
+    SKTCaptureDataConfirmationLedGreen=1,
+    /** Device LED flashes in red when confirming a read */
+    SKTCaptureDataConfirmationLedRed=2
 };
 
 /**
@@ -233,9 +306,12 @@ typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationLed)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationBeep)
 {
-    SKTCaptureDataConfirmationBeepNone=0, /** Device makes no beep when confirming a read */
-    SKTCaptureDataConfirmationBeepGood=1, /** Device makes a good beep when confirming a read */
-    SKTCaptureDataConfirmationBeepBad=2 /** Device makes a bad beep when confirming a read */
+    /** Device makes no beep when confirming a read */
+    SKTCaptureDataConfirmationBeepNone=0,
+    /** Device makes a good beep when confirming a read */
+    SKTCaptureDataConfirmationBeepGood=1,
+    /** Device makes a bad beep when confirming a read */
+    SKTCaptureDataConfirmationBeepBad=2
 };
 
 /**
@@ -246,9 +322,12 @@ typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationBeep)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationRumble)
 {
-    SKTCaptureDataConfirmationRumbleNone=0, /** no rumble when confirming a read */
-    SKTCaptureDataConfirmationRumbleGood=1, /** good rumble when confirming a read */
-    SKTCaptureDataConfirmationRumbleBad=2 /** bad rumble when confirming a read */
+    /** no rumble when confirming a read */
+    SKTCaptureDataConfirmationRumbleNone=0,
+    /** good rumble when confirming a read */
+    SKTCaptureDataConfirmationRumbleGood=1,
+    /** bad rumble when confirming a read */
+    SKTCaptureDataConfirmationRumbleBad=2
 };
 
 /**
@@ -259,8 +338,10 @@ typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationRumble)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureFlash)
 {
-    SKTCaptureFlashOff=0, /**  turn the flash off */
-    SKTCaptureFlashOn=1 /** turn the flash on */
+    /**  turn the flash off */
+    SKTCaptureFlashOff=0,
+    /** turn the flash on */
+    SKTCaptureFlashOn=1
 };
 
 /**
@@ -272,10 +353,14 @@ typedef NS_ENUM (NSInteger, SKTCaptureFlash)
  */
 typedef NS_ENUM (NSInteger, SKTCaptureSoftScan)
 {
-    SKTCaptureSoftScanEnable=0, /** the SoftScan feature is enabled */
-    SKTCaptureSoftScanDisable=1, /** the SoftScan feature is disabled */
-    SKTCaptureSoftScanNotSupported=2, /** make the SoftScan feature not supported (Set Property only) */
-    SKTCaptureSoftScanSupported=3 /** make the SoftScan feature supported (Set property only) */
+    /** the SoftScan feature is enabled */
+    SKTCaptureSoftScanEnable=0,
+    /** the SoftScan feature is disabled */
+    SKTCaptureSoftScanDisable=1,
+    /** make the SoftScan feature not supported (Set Property only) */
+    SKTCaptureSoftScanNotSupported=2,
+    /** make the SoftScan feature supported (Set property only) */
+    SKTCaptureSoftScanSupported=3
 };
 
 /**
@@ -331,11 +416,16 @@ extern NSString* _Nonnull SKTCaptureSoftScanCamera; // "front" "back"
  */
 typedef NS_OPTIONS(NSInteger, SKTCaptureButtonsState)
 {
-    SKTCaptureButtonsStateLeft=0x01, /** the left button has its state changed */
-    SKTCaptureButtonsStateRight=0x02, /** the right button has its state changed */
-    SKTCaptureButtonsStateMiddle=0x04, /** the middle button has its state changed */
-    SKTCaptureButtonsStatePower=0x08, /** the power button has its state changed */
-    SKTCaptureButtonsStateRingDetach=0x10 /** the ring detach state has changed (Series 9 only) */
+    /** the left button has its state changed */
+    SKTCaptureButtonsStateLeft=0x01,
+    /** the right button has its state changed */
+    SKTCaptureButtonsStateRight=0x02,
+    /** the middle button has its state changed */
+    SKTCaptureButtonsStateMiddle=0x04,
+    /** the power button has its state changed */
+    SKTCaptureButtonsStatePower=0x08,
+    /** the ring detach state has changed (Series 9 only) */
+    SKTCaptureButtonsStateRingDetach=0x10
 };
 
 
@@ -344,10 +434,14 @@ typedef NS_OPTIONS(NSInteger, SKTCaptureButtonsState)
  */
 typedef NS_ENUM(NSInteger, SKTCapturePowerState)
 {
-    SKTCapturePowerStateUnknown=0x00, /** the power state is unknown */
-    SKTCapturePowerStateOnBattery=0x01, /** the power comes from battery */
-    SKTCapturePowerStateOnCradle=0x02, /** the power comes from cradle */
-    SKTCapturePowerStateOnAc=0x04 /** the power comes from AC */
+    /** the power state is unknown */
+    SKTCapturePowerStateUnknown=0x00,
+    /** the power comes from battery */
+    SKTCapturePowerStateOnBattery=0x01,
+    /** the power comes from cradle */
+    SKTCapturePowerStateOnCradle=0x02,
+    /** the power comes from AC */
+    SKTCapturePowerStateOnAc=0x04
 };
 
 /**
@@ -357,9 +451,12 @@ typedef NS_ENUM(NSInteger, SKTCapturePowerState)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureProfileSelect)
 {
-    SKTCaptureProfileSelectNone=0, /** the profile has no type */
-    SKTCaptureProfileSelectSpp=1, /** the profile is Serial Port Profile */
-    SKTCaptureProfileSelectHid=2 /** the profile is Keyboard emulation HID */
+    /** the profile has no type */
+    SKTCaptureProfileSelectNone=0,
+    /** the profile is Serial Port Profile */
+    SKTCaptureProfileSelectSpp=1,
+    /** the profile is Keyboard emulation HID */
+    SKTCaptureProfileSelectHid=2
 };
 
 /**
@@ -369,9 +466,12 @@ typedef NS_ENUM(NSInteger, SKTCaptureProfileSelect)
 */
 typedef NS_ENUM(NSInteger, SKTCaptureProfileConfig)
 {
-    SKTCaptureProfileConfigNone=0, /** do nothing when the profile is active */
-    SKTCaptureProfileConfigAcceptor=1, /** accepts incoming connection when the profile is active */
-    SKTCaptureProfileConfigInitiator=2 /** initiate a connection when the profile is active */
+    /** do nothing when the profile is active */
+    SKTCaptureProfileConfigNone=0,
+    /** accepts incoming connection when the profile is active */
+    SKTCaptureProfileConfigAcceptor=1,
+    /** initiate a connection when the profile is active */
+    SKTCaptureProfileConfigInitiator=2
 };
 
 /**
@@ -381,8 +481,10 @@ typedef NS_ENUM(NSInteger, SKTCaptureProfileConfig)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureDisconnect)
 {
-    SKTCaptureDisconnectStartProfile=0, /** disconnect and then start the selected profile */
-    SKTCaptureDisconnectDisableRadio=1, /** disconnect and disable the radio (low power) */
+    /** disconnect and then start the selected profile */
+    SKTCaptureDisconnectStartProfile=0,
+    /** disconnect and disable the radio (low power) */
+    SKTCaptureDisconnectDisableRadio=1,
 };
 
 /**
@@ -392,13 +494,20 @@ typedef NS_ENUM(NSInteger, SKTCaptureDisconnect)
  */
 typedef NS_OPTIONS(NSInteger, SKTCaptureNotifications)
 {
-    SKTCaptureNotificationsNone=0, /** disable all notifications */
-    SKTCaptureNotificationsScanButtonPress=1<<0, /** enable scan button press notifications */
-    SKTCaptureNotificationsScanButtonRelease=1<<1, /** enable scan button release notifications */
-    SKTCaptureNotificationsPowerButtonPress=1<<2, /** enable power button release notifications */
-    SKTCaptureNotificationsPowerButtonRelease=1<<3, /** enable power button release notifications */
-    SKTCaptureNotificationsPowerState=1<<4, /** enable power state change notifications */
-    SKTCaptureNotificationsBatteryLevelChange=1<<5 /** enable battery level change notifications */
+    /** disable all notifications */
+    SKTCaptureNotificationsNone=0,
+    /** enable scan button press notifications */
+    SKTCaptureNotificationsScanButtonPress=1<<0,
+    /** enable scan button release notifications */
+    SKTCaptureNotificationsScanButtonRelease=1<<1,
+    /** enable power button release notifications */
+    SKTCaptureNotificationsPowerButtonPress=1<<2,
+    /** enable power button release notifications */
+    SKTCaptureNotificationsPowerButtonRelease=1<<3,
+    /** enable power state change notifications */
+    SKTCaptureNotificationsPowerState=1<<4,
+    /** enable battery level change notifications */
+    SKTCaptureNotificationsBatteryLevelChange=1<<5
 };
 
 /**
@@ -408,8 +517,10 @@ typedef NS_OPTIONS(NSInteger, SKTCaptureNotifications)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureStartUpRole)
 {
-    SKTCaptureStartUpRoleSPPAcceptor=0, /** the SPP Role will always be Acceptor */
-    SKTCaptureStartUpRoleSPPLastRole=1 /** the SPP Role will always be what was the last SPP Role config */
+    /** the SPP Role will always be Acceptor */
+    SKTCaptureStartUpRoleSPPAcceptor=0,
+    /** the SPP Role will always be what was the last SPP Role config */
+    SKTCaptureStartUpRoleSPPLastRole=1
 };
 
 /**
@@ -419,8 +530,10 @@ typedef NS_ENUM(NSInteger, SKTCaptureStartUpRole)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureConnectBeepConfig)
 {
-    SKTCaptureConnectBeepConfigNoBeep=0, /** don't beep when a connection is established */
-    SKTCaptureConnectBeepConfigBeep=1 /** Beep when a connection is established */
+    /** don't beep when a connection is established */
+    SKTCaptureConnectBeepConfigNoBeep=0,
+    /** Beep when a connection is established */
+    SKTCaptureConnectBeepConfigBeep=1
 };
 
 /**
@@ -430,8 +543,10 @@ typedef NS_ENUM(NSInteger, SKTCaptureConnectBeepConfig)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureDataFormat)
 {
-    SKTCaptureDataFormatRaw=0, /** data format without protocol fields */
-    SKTCaptureDataFormatPacket=1 /** data format respecting the protocol format */
+    /** data format without protocol fields */
+    SKTCaptureDataFormatRaw=0,
+    /** data format respecting the protocol format */
+    SKTCaptureDataFormatPacket=1
 };
 
 /**
@@ -441,9 +556,12 @@ typedef NS_ENUM(NSInteger, SKTCaptureDataFormat)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureTimer)
 {
-    SKTCaptureTimerTriggerAutoLockTimeout=1, /** Trigger lock selected */
-    SKTCaptureTimerPowerOffDisconnected=2, /** Disconnected state timeout */
-    SKTCaptureTimerPowerOffConnected=4 /** Connected state timeout */
+    /** Trigger lock selected */
+    SKTCaptureTimerTriggerAutoLockTimeout=1,
+    /** Disconnected state timeout */
+    SKTCaptureTimerPowerOffDisconnected=2,
+    /** Connected state timeout */
+    SKTCaptureTimerPowerOffConnected=4
 };
 
 /**
@@ -453,12 +571,18 @@ typedef NS_ENUM(NSInteger, SKTCaptureTimer)
  */
 typedef NS_ENUM(NSInteger, SKTCaptureConnectReason)
 {
-    SKTCaptureConnectReasonUnknown=0, /** unknown reason */
-    SKTCaptureConnectReasonPowerOn=1, /** the device has connected because it powers on */
-    SKTCaptureConnectReasonBarcode=2, /** the device has connected because it scans a connect barcode */
-    SKTCaptureConnectReasonUserAction=3, /** the device has connected because the user press the power button or the trigger button */
-    SKTCaptureConnectReasonHostChange=4, /** the device has connected because the host has changed */
-    SKTCaptureConnectReasonRetry=5, /** the device has connected because it is back in range */
+    /** unknown reason */
+    SKTCaptureConnectReasonUnknown=0,
+    /** the device has connected because it powers on */
+    SKTCaptureConnectReasonPowerOn=1,
+    /** the device has connected because it scans a connect barcode */
+    SKTCaptureConnectReasonBarcode=2,
+    /** the device has connected because the user press the power button or the trigger button */
+    SKTCaptureConnectReasonUserAction=3,
+    /** the device has connected because the host has changed */
+    SKTCaptureConnectReasonHostChange=4,
+    /** the device has connected because it is back in range */
+    SKTCaptureConnectReasonRetry=5,
 };
 
 /**
@@ -467,10 +591,14 @@ typedef NS_ENUM(NSInteger, SKTCaptureConnectReason)
 
  */
 typedef NS_ENUM(NSInteger, SKTCaptureStandConfig) {
-    SKTCaptureStandConfigMobileMode=0, /** the device is always in trigger mode */
-    SKTCaptureStandConfigKioskMode=1, /** the device is always in presentation mode */
-    SKTCaptureStandConfigDetectMode=2, /** the device is in presentation mode when resting on stand, trigger mode otherwise */
-    SKTCaptureStandConfigAutoMode=3, /** the device stays in presentation mode until trigger is pressed, goes back in presentation when resting on stand */
+    /** the device is always in trigger mode */
+    SKTCaptureStandConfigMobileMode=0,
+    /** the device is always in presentation mode */
+    SKTCaptureStandConfigKioskMode=1,
+    /** the device is in presentation mode when resting on stand, trigger mode otherwise */
+    SKTCaptureStandConfigDetectMode=2,
+    /** the device stays in presentation mode until trigger is pressed, goes back in presentation when resting on stand */
+    SKTCaptureStandConfigAutoMode=3,
 };
 
 /**
@@ -479,17 +607,28 @@ typedef NS_ENUM(NSInteger, SKTCaptureStandConfig) {
 
  */
 typedef NS_ENUM(NSInteger, SKTCapturePropertyType) {
-    SKTCapturePropertyTypeNone, /** the property does not have parameter */
-    SKTCapturePropertyTypeNotApplicable, /** the parameter is not applicable for the property */
-    SKTCapturePropertyTypeByte, /** the property has a byte as parameter */
-    SKTCapturePropertyTypeUlong, /** the property has an unisgned long integer as parameter */
-    SKTCapturePropertyTypeArray, /** the property has a byte array as parameter */
-    SKTCapturePropertyTypeString, /** the property has a length variable string as parameter */
-    SKTCapturePropertyTypeVersion, /** the property has a version structure as parameter */
-    SKTCapturePropertyTypeDataSource, /** the property has a Data Source structure as parameter */
-    SKTCapturePropertyTypeEnum, /** the property has an enumeration structure as parameter */
-    SKTCapturePropertyTypeObject, /** the property has an object as parameter */
-    SKTCapturePropertyTypeLastType, /** this is not a parameter property type but it gives the number of enums */
+    /** the property does not have parameter */
+    SKTCapturePropertyTypeNone,
+    /** the parameter is not applicable for the property */
+    SKTCapturePropertyTypeNotApplicable,
+    /** the property has a byte as parameter */
+    SKTCapturePropertyTypeByte,
+    /** the property has an unisgned long integer as parameter */
+    SKTCapturePropertyTypeUlong,
+    /** the property has a byte array as parameter */
+    SKTCapturePropertyTypeArray,
+    /** the property has a length variable string as parameter */
+    SKTCapturePropertyTypeString,
+    /** the property has a version structure as parameter */
+    SKTCapturePropertyTypeVersion,
+    /** the property has a Data Source structure as parameter */
+    SKTCapturePropertyTypeDataSource,
+    /** the property has an enumeration structure as parameter */
+    SKTCapturePropertyTypeEnum,
+    /** the property has an object as parameter */
+    SKTCapturePropertyTypeObject,
+    /** this is not a parameter property type but it gives the number of enums */
+    SKTCapturePropertyTypeLastType,
 };
 
 /**

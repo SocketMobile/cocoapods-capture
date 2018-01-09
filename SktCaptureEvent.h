@@ -17,22 +17,38 @@
 
  */
 typedef NS_ENUM(NSInteger, SKTCaptureEventID) {
- SKTCaptureEventIDNotInitialized, /** the event ID is not initialized */
- SKTCaptureEventIDDeviceArrival, /** event when a device has connected or is present */
- SKTCaptureEventIDDeviceRemoval, /** event when a device is no longer present */
- SKTCaptureEventIDTerminate, /** event when Capture is terminated */
- SKTCaptureEventIDError, /** event when Capture had an error */
- SKTCaptureEventIDDecodedData, /** event when Capture has some decoded data available */
- SKTCaptureEventIDPower, /** event when a device sends a power change notification */
- SKTCaptureEventIDButtons, /** event when the device button status has changed */
- SKTCaptureEventIDBatteryLevel, /** event when the attery Level has changed */
- SKTCaptureEventIDListenerStarted, /** event when the communication port listener has started */
- SKTCaptureEventIDDeviceOwnership, /** event when a device ownership has changed */
- SKTCaptureEventIDDeviceManagerArrival,// Device Manager Arrival (BLE)
-    SKTCaptureEventIDDeviceManagerRemoval,// Device Manager Removal (BLE)
-    SKTCaptureEventIDDeviceDiscovered,// Device Discovered (BLE)
-    SKTCaptureEventIDDiscoveryEnd, // End of a Device Discovery (BLE)
-    SKTCaptureEventIDLastID, /** -not an event- numeric value representing the number of events */
+ /** the event ID is not initialized */
+ SKTCaptureEventIDNotInitialized,
+ /** event when a device has connected or is present */
+ SKTCaptureEventIDDeviceArrival,
+ /** event when a device is no longer present */
+ SKTCaptureEventIDDeviceRemoval,
+ /** event when Capture is terminated */
+ SKTCaptureEventIDTerminate,
+ /** event when Capture had an error */
+ SKTCaptureEventIDError,
+ /** event when Capture has some decoded data available */
+ SKTCaptureEventIDDecodedData,
+ /** event when a device sends a power change notification */
+ SKTCaptureEventIDPower,
+ /** event when the device button status has changed */
+ SKTCaptureEventIDButtons,
+ /** event when the battery Level has changed */
+ SKTCaptureEventIDBatteryLevel,
+ /** event when the communication port listener has started */
+ SKTCaptureEventIDListenerStarted,
+ /** event when a device ownership has changed */
+ SKTCaptureEventIDDeviceOwnership,
+ /** Device Manager Arrival (BLE) */
+ SKTCaptureEventIDDeviceManagerArrival,
+ /** Device Manager Removal (BLE) */
+ SKTCaptureEventIDDeviceManagerRemoval,
+ /** Device Discovered (BLE) */
+ SKTCaptureEventIDDeviceDiscovered,
+ /** End of a Device Discovery (BLE) */
+ SKTCaptureEventIDDiscoveryEnd,
+ /** -not an event- numeric value representing the number of events */
+ SKTCaptureEventIDLastID,
 };
 
 /**
@@ -54,14 +70,22 @@ typedef NS_ENUM(NSInteger, SKTCaptureEventID) {
 
  */
 typedef NS_ENUM(NSInteger, SKTCaptureEventDataType) {
- SKTCaptureEventDataTypeNone, /** no data associated to the event. */
- SKTCaptureEventDataTypeByte, /** the data associated to the event is a byte. */
- SKTCaptureEventDataTypeUlong, /** the data associated to the event is a long integer */
- SKTCaptureEventDataTypeArray, /** the data associated to the event is an array. */
- SKTCaptureEventDataTypeString, /** the data associated to the event is a string. */
- SKTCaptureEventDataTypeDecodedData, /** the data associated to the event is a decoded data */
- SKTCaptureEventDataTypeDeviceInfo, /** the data associated to the event contains the device guid, type, and name */
- SKTCaptureEventDataTypeLastID, /** not an event type just a numeric value for the number of data types */
+ /** no data associated to the event. */
+ SKTCaptureEventDataTypeNone,
+ /** the data associated to the event is a byte. */
+ SKTCaptureEventDataTypeByte,
+ /** the data associated to the event is a long integer */
+ SKTCaptureEventDataTypeUlong,
+ /** the data associated to the event is an array. */
+ SKTCaptureEventDataTypeArray,
+ /** the data associated to the event is a string. */
+ SKTCaptureEventDataTypeString,
+ /** the data associated to the event is a decoded data */
+ SKTCaptureEventDataTypeDecodedData,
+ /** the data associated to the event contains the device guid, type, and name */
+ SKTCaptureEventDataTypeDeviceInfo,
+ /** not an event type just a numeric value for the number of data types */
+ SKTCaptureEventDataTypeLastID,
 };
 
 /**
