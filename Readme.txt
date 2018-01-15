@@ -1,6 +1,6 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.32
+                      Capture SDK Version 1.0.61
 
 
                             Socket Mobile, Inc.
@@ -18,6 +18,8 @@ Content
 5) Capture usage
 6) Device Notifications (Battery Level)
 7) SoftScan
+8) Closing Capture
+9) Known issues
 
 Appendix A. Changes log
 
@@ -312,6 +314,34 @@ can control.
 Once the application trigger a scan, the decoded data arrives the same way with
 the same information than as any other scanners supported by Capture.
 
+8. Closing Capture
+------------------
+It is not recommended to close Capture because the scanner will go through
+reinitialization the next time Capture is open which causes a delay before being
+able to use the scanner.
+
+Closing Capture does not affect power consumption, since the scanner stays
+connected to the iOS host anyway.
+
+It is also worth noting that when the scanner is connected the power consumption
+is really minimal, compare to establishing a connection.
+
+If the motive of closing Capture is to not receive any decoded data from the
+scanner then the application delegate can simply be removed and the application
+will no longer receive any event from the scanner until it sets its delegate
+back again.
+
+9. Known issues
+---------------
+
+9.1 Long delay when closing Capture while a scanner is connected
+----------------------------------------------------------------
+There is a long delay (about 10s) when closing Capture while there is a scanner
+connected. The close callback should be used in order to know when Capture has
+been correctly close. The Result of closing Capture while a scanner is connected
+is set to ESKT_WAITTIMEDOUT (1) when such delay in closing Capture occurs.
+This issue will be addressed in the future release.
+
 
 Appendix A. Changes log
 -----------------------
@@ -323,5 +353,8 @@ Appendix A. Changes log
 
   . Fix the inline comment to display correctly in Xcode help
 
-  . Fix a bug when enabling SoftScan at the same than enabling/disabling D600
-  support.
+  . Fix a bug when enabling SoftScan at the same time than enabling/disabling
+  D600 support.
+
+1.0.61
+  . Fix a crash when closing Capture

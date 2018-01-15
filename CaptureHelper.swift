@@ -935,6 +935,7 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     open func closeWithCompletionHandler(_ completion: @escaping (_ result: SKTResult)->Void){
         if let cap = capture {
             cap.close(completionHandler:{(result) in
+                self.capture = nil
                 if let dq = self.delegateDispatchQueue as DispatchQueue! {
                     dq.async{
                         completion(result)
