@@ -1,6 +1,6 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.61
+                      Capture SDK Version 1.0.65
 
 
                             Socket Mobile, Inc.
@@ -358,3 +358,8 @@ Appendix A. Changes log
 
 1.0.61
   . Fix a crash when closing Capture
+
+1.0.65
+  . Fix the ESKT_LISTEMPTY (-6) error when getting the BLE Device Manager favorites
+
+  . Add notification of already connected devices when pushing a delegate

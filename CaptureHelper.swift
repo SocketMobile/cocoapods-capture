@@ -852,6 +852,13 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     ///
     /// - Parameter delegate: reference to a delegate to push in the delegates stack
     open func pushDelegate(_ delegate: CaptureHelperDelegate){
+        // make sure the currentDelegate if not nil
+        // that is not equal to delegate passed in argument
+        if let current = currentDelegate {
+            if (current as AnyObject === delegate as AnyObject) {
+                return
+            }
+        }
         delegatesStack.append(delegate)
         currentDelegate = delegate
 
@@ -863,6 +870,17 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                     }
                 } else {
                     delegate.didNotifyArrivalForDevice(device.value, withResult: SKTCaptureErrors.E_NOERROR)
+                }
+            }
+        }
+        if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
+            for device in deviceManagers {
+                if let dq = self.delegateDispatchQueue as DispatchQueue! {
+                    dq.async{
+                        delegate.didNotifyArrivalForDeviceManager(device.value, withResult: SKTCaptureErrors.E_NOERROR)
+                    }
+                } else {
+                    delegate.didNotifyArrivalForDeviceManager(device.value, withResult: SKTCaptureErrors.E_NOERROR)
                 }
             }
         }
