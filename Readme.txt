@@ -1,6 +1,6 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.67
+                      Capture SDK Version 1.0.117
 
 
                             Socket Mobile, Inc.
@@ -366,3 +366,16 @@ Appendix A. Changes log
 
 1.0.67
   . Fix the AppKey crash when opening the Capture SDK.
+
+1.0.117
+  . Fix the multiple decoded data when using SoftScan.
+
+  . Fix the scanner long reconnection time.
+
+  . Replace AppInfo.BundleID by AppInfo.AppID, because the AppID is the platforms
+  prefix followed by a colon and by the App Bundle ID. ie: "ios.com.mycompany.myapp".
+
+  . Compiled with Xcode 9.3.
+
+  . Better AppKey verification handling various size of App Keys.
+  

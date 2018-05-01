@@ -29,8 +29,9 @@ typedef void* SKTHandle;
  be able to open Capture.
  */
 @interface SKTAppInfo : NSObject
-/** @brief should be set to the app BundleID: com.mycompany.myapp */
-@property (strong) NSString* BundleID;
+/** @brief should be set to the platform prefix followed by a colon and the app Bundle ID: example: "ios: com.mycompany.myapp"
+*/
+@property (strong) NSString* AppID;
 
 /** @brief should be set to the Socket Mobile Developer ID: 07ef56c4-7acc-323b-7821-5c0ab2122243*/
 @property (strong) NSString* DeveloperID;
