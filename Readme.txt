@@ -1,6 +1,6 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.117
+                      Capture SDK Version 1.0.151
 
 
                             Socket Mobile, Inc.
@@ -90,7 +90,7 @@ As the application developer this SDK will give you full programmatic access to
 a connected CHS scanner to customize the scanner Symbology, data support and
 manage scanner feedback messages and functions.
 The API document for the SDK can be found here:
-http://docs.socketmobile.com/capture-preview/ios/en/latest/
+https://docs.socketmobile.com/capture/ios/en/latest/
 
 Note: The CRS Series 9 Ring Scanner is NOT supported.
 
@@ -378,4 +378,8 @@ Appendix A. Changes log
   . Compiled with Xcode 9.3.
 
   . Better AppKey verification handling various size of App Keys.
-  
+
+1.0.151
+  . Move the Capture.xml config file out of the application Documents folder.
+
+  . Fix crash occurring when cancelling the pairing of a D600.
