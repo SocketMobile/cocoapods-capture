@@ -67,8 +67,26 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceProductId) {
     SKTCaptureDeviceProductIdD700Series,
     /** product of D730 Series */
     SKTCaptureDeviceProductIdD730Series,
+    /** product of the D740 Series */
+    SKTCaptureDeviceProductIdD740Series,
     /** product of the D750 Series */
     SKTCaptureDeviceProductIdD750Series,
+    /** product of the D750 Series */
+    SKTCaptureDeviceProductIdD760Series,
+    /** product of the S700 Series */
+    SKTCaptureDeviceProductIdS700Series,
+    /** product of the S730 Series */
+  	SKTCaptureDeviceProductIdS730Series,
+    /** product of the S740 Series */
+  	SKTCaptureDeviceProductIdS740Series,
+    /** product of the S750 Series */
+  	SKTCaptureDeviceProductIdS750Series,
+    /** product of the S760 Series */
+  	SKTCaptureDeviceProductIdS760Series,
+    /** product of the S860 Series */
+  	SKTCaptureDeviceProductIdS860Series,
+    /** product of the D790 Series */
+  	SKTCaptureDeviceProductIdD790Series,
     /** product of the D600 Series */
     SKTCaptureDeviceProductIdD600Series,
     /** product unknown */
@@ -94,38 +112,65 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceManagerId) {
  */
 typedef NS_ENUM (NSInteger, SKTCaptureDeviceType) {
     /** unknown device type */
-    SKTCaptureDeviceTypeNone =
+    SKTCaptureDeviceTypeNone = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdNone,
     /** Scanner 7 device type */
-    SKTCaptureDeviceTypeScanner7 =
+    SKTCaptureDeviceTypeScanner7 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7Series,
     /** Scanner 7x device type */
-    SKTCaptureDeviceTypeScanner7x =
+    SKTCaptureDeviceTypeScanner7x = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xSeries,
     /** Scanner 7xi device type */
-    SKTCaptureDeviceTypeScanner7xi =
+    SKTCaptureDeviceTypeScanner7xi = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId7xiSeries,
     /** Scanner 9 device type */
-    SKTCaptureDeviceTypeScanner9 =
+    SKTCaptureDeviceTypeScanner9 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId9Series,
     /** SoftScan device type */
-    SKTCaptureDeviceTypeSoftScan =
+    SKTCaptureDeviceTypeSoftScan = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeNone<<16 | SKTCaptureDeviceProductIdSoftScan,
     /** Scanner 8ci device type */
-    SKTCaptureDeviceTypeScanner8ci =
+    SKTCaptureDeviceTypeScanner8ci = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8ciSeries,
     /** Scanner 8qi device type */
-    SKTCaptureDeviceTypeScanner8qi =
+    SKTCaptureDeviceTypeScanner8qi = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8qiSeries,
     /** Scanner D700 device type */
-    SKTCaptureDeviceTypeScannerD700 =
+    SKTCaptureDeviceTypeScannerD700 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD700Series,
     /** Scanner D730 device type */
-    SKTCaptureDeviceTypeScannerD730 =
+    SKTCaptureDeviceTypeScannerD730 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD730Series,
+    /** Scanner D740 device type */
+    SKTCaptureDeviceTypeScannerD740 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD740Series,
     /** Scanner D750 device type */
-    SKTCaptureDeviceTypeScannerD750 =
+    SKTCaptureDeviceTypeScannerD750 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD750Series,
+    /** Scanner D760 device type */
+    SKTCaptureDeviceTypeScannerD760 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD760Series,
+    /** Scanner S700 device type */
+    SKTCaptureDeviceTypeScannerS700 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS700Series,
+    /** Scanner S730 device type */
+    SKTCaptureDeviceTypeScannerS730 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS730Series,
+    /** Scanner S740 device type */
+    SKTCaptureDeviceTypeScannerS740 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS740Series,
+    /** Scanner S750 device type */
+    SKTCaptureDeviceTypeScannerS750 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS750Series,
+    /** Scanner S760 device type */
+    SKTCaptureDeviceTypeScannerS760 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS760Series,
+    /** Scanner S860 device type */
+    SKTCaptureDeviceTypeScannerS860 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS860Series,
+    /** Scanner D790 device type */
+    SKTCaptureDeviceTypeScannerD790 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD790Series,
     /** Scanner D600 device type */
     SKTCaptureDeviceTypeScannerD600 = SKTCaptureDeviceTypeClassDevice<<24 |
     SKTCaptureDeviceInterfaceTypeBle<<16 | SKTCaptureDeviceProductIdD600Series,
@@ -328,6 +373,102 @@ typedef NS_ENUM (NSInteger, SKTCaptureDataConfirmationRumble)
     SKTCaptureDataConfirmationRumbleGood=1,
     /** bad rumble when confirming a read */
     SKTCaptureDataConfirmationRumbleBad=2
+};
+
+/* Previous Implementation. CHRISHONW - May 17, 2018
+// statistic Counter identifiers
+typedef NS_ENUM (NSInteger, SKTCaptureStatisticCounters)
+{
+    SKTCaptureCounterSkip=-1,
+    SKTCaptureCounterUnknown=0,
+    SKTCaptureCounterConnect=1,
+    SKTCaptureCounterDisconnect=2,
+    SKTCaptureCounterUnbond=3,
+    SKTCaptureCounterFactoryReset=4,
+    SKTCaptureCounterScans=5,
+    SKTCaptureCounterScanButtonUp=6,
+    SKTCaptureCounterScanButtonDown=7,
+    SKTCaptureCounterPowerButtonUp=8,
+    SKTCaptureCounterPowerButtonDown=9,
+    SKTCaptureCounterPowerOnACTimeInMinutes=10,
+    SKTCaptureCounterPowerOnBatTimeInMinutes=11,
+    // SSI only
+    SKTCaptureCounterRfcommSend=12,
+    SKTCaptureCounterRfcommReceive=13,
+    SKTCaptureCounterRfcommReceiveDiscarded=14,
+    SKTCaptureCounterUartSend=15,
+    SKTCaptureCounterUartReceive=16,
+    SKTCaptureCounterUartReceiveDiscarded=17,
+    // Specific to CRS
+    SKTCaptureCounterButtonLeftPress=18,
+    SKTCaptureCounterButtonLeftRelease=19,
+    SKTCaptureCounterButtonRightPress=20,
+    SKTCaptureCounterButtonRightRelease=21,
+    SKTCaptureCounterRingUnitDetachEvents=22,
+    SKTCaptureCounterRingUnitAttachEvents=23,
+
+    // 7X only (ISCI)
+    SKTCaptureCounterDecodedBytes=24,
+    SKTCaptureCounterAbnormalShutDowns=25,
+    SKTCaptureCounterBatteryChargeCycles=26,
+    SKTCaptureCounterBatteryChangeCount=27,
+
+    // Only on 8Ci
+    SKTCaptureCounterPowerOn=28,
+    SKTCaptureCounterPowerOff=29,
+
+    // 7X/Q only 7630 and higher
+    SKTCaptureCounterStandModeChange = 30,
+
+    SKTCaptureCounterLast// this is not a counter, just the last index
+};
+*/
+
+// statistic Counter identifiers
+typedef NS_ENUM (NSInteger, SKTCaptureStatisticCounters)
+{
+    SKTCaptureCounterSkip=0,
+    SKTCaptureCounterUnknown=1,
+    SKTCaptureCounterConnect=2,
+    SKTCaptureCounterDisconnect=3,
+    SKTCaptureCounterUnbond=4,
+    SKTCaptureCounterFactoryReset=5,
+    SKTCaptureCounterScans=6,
+    SKTCaptureCounterScanButtonUp=7,
+    SKTCaptureCounterScanButtonDown=8,
+    SKTCaptureCounterPowerButtonUp=9,
+    SKTCaptureCounterPowerButtonDown=10,
+    SKTCaptureCounterPowerOnACTimeInMinutes=11,
+    SKTCaptureCounterPowerOnBatTimeInMinutes=12,
+    // SSI only
+    SKTCaptureCounterRfcommSend=13,
+    SKTCaptureCounterRfcommReceive=14,
+    SKTCaptureCounterRfcommReceiveDiscarded=15,
+    SKTCaptureCounterUartSend=16,
+    SKTCaptureCounterUartReceive=17,
+    SKTCaptureCounterUartReceiveDiscarded=18,
+    // Specific to CRS
+    SKTCaptureCounterButtonLeftPress=19,
+    SKTCaptureCounterButtonLeftRelease=20,
+    SKTCaptureCounterButtonRightPress=21,
+    SKTCaptureCounterButtonRightRelease=22,
+    SKTCaptureCounterRingUnitDetachEvents=23,
+    SKTCaptureCounterRingUnitAttachEvents=24,
+
+    // 7X only (ISCI)
+    SKTCaptureCounterDecodedBytes=25,
+    SKTCaptureCounterAbnormalShutDowns=26,
+    SKTCaptureCounterBatteryChargeCycles=27,
+    SKTCaptureCounterBatteryChangeCount=28,
+
+    // Only on 8Ci
+    SKTCaptureCounterPowerOn=29,
+    SKTCaptureCounterPowerOff=30,
+
+    // 7X/Q only 7630 and higher
+    SKTCaptureCounterStandModeChange = 31,
+
+    SKTCaptureCounterLast// this is not a counter, just the last index
 };
 
 /**

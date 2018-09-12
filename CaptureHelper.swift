@@ -806,6 +806,7 @@ public class CaptureHelperDeviceManager : CaptureHelperDevice {
 /// 4- open Capture with the SKTAppInfo instance
 public class CaptureHelper : NSObject, SKTCaptureDelegate {
     private var capture : SKTCapture?
+    private var openCount = 0;
 
     fileprivate var delegatesStack = Array<CaptureHelperDelegate>()
     fileprivate var currentDelegate : CaptureHelperDelegate?
@@ -934,14 +935,16 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
         if (capture == nil) {
             capture = SKTCapture(delegate: self)
             capture?.open(with: appInfo, completionHandler: {(result) in
-                if let dq = self.delegateDispatchQueue {
-                    dq.async{
-                        completion(result)
-                    }
+                if result == SKTCaptureErrors.E_NOERROR {
+                    self.openCount += 1;
                 } else {
-                    completion(result)
+                    self.capture = nil;
                 }
+                self.callCompletion(withResult:result, withCompletion:completion)
             })
+        } else {
+            self.openCount += 1;
+            self.callCompletion(withResult:SKTCaptureErrors.E_NOERROR, withCompletion:completion)
         }
     }
 
@@ -952,22 +955,20 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Parameter completionHandler: called upon complete with the result code
     open func closeWithCompletionHandler(_ completion: @escaping (_ result: SKTResult)->Void){
         if let cap = capture {
-            cap.close(completionHandler:{(result) in
-                self.capture = nil
-                if let dq = self.delegateDispatchQueue {
-                    dq.async{
-                        completion(result)
-                    }
-                } else {
-                    completion(result)
-                }
-            })
+            self.openCount -= 1;
+            if self.openCount == 0 {
+                cap.close(completionHandler:{(result) in
+                    self.capture = nil
+                    self.callCompletion(withResult:result, withCompletion:completion)
+                })
+            } else {
+                callCompletion(withResult: SKTCaptureErrors.E_NOERROR, withCompletion: completion);
+            }
         }
         else {
-            completion(SKTCaptureErrors.E_NOERROR)
+            callCompletion(withResult: SKTCaptureErrors.E_NOERROR, withCompletion: completion);
         }
     }
-
 
     /// delegate from Capture that is called each time a Capture event is fired
     ///
@@ -1313,4 +1314,22 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
             }
         }
     }
+    
+    /// call the completion block function with the result passed in argument.
+    ///
+    /// - Parameters:
+    ///   - result: contains the result to call the completion block with
+    ///   - completion: block called with the appropriate dispatch queue with the
+    /// result as argument.
+    func callCompletion(withResult result:SKTResult, withCompletion completion: @escaping (_ result: SKTResult)->Void) {
+        if let dq = self.delegateDispatchQueue {
+            dq.async{
+                completion(result)
+            }
+        } else {
+            completion(result)
+        }
+    }
+    
+
 }

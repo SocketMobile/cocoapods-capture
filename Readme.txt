@@ -1,6 +1,6 @@
 ================================================================================
 
-                      Capture SDK Version 1.0.151
+                      Capture SDK Version 1.0.341
 
 
                             Socket Mobile, Inc.
@@ -383,3 +383,12 @@ Appendix A. Changes log
   . Move the Capture.xml config file out of the application Documents folder.
 
   . Fix crash occurring when cancelling the pairing of a D600.
+
+1.0.341
+  . Fix the 10s delay when closing Capture while a scanner is connected.
+
+  . Added new Socket product types
+
+  . Better handling when opening and closing Capture multiple times.
+
+  . Compiled with Xcode 9.4.

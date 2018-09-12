@@ -12,25 +12,30 @@
 
 typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	/**
-	property to close and abort the listener thread
+	Set to notify Capture that the client is shutting down gracefully.
+	Capture will send device removal events followed by a terminate
+	event. Once you receive the terminate event, it is safe to shut
+	down Capture.
 
 	Device: False	Get Type: NotApplicable 	Set Type: None
 	*/
 	SKTCapturePropertyIDAbort = -2146435072,
 
 	/**
-	property to get the Capture version
+	Gets the Capture service version.
 
 	Device: False	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDVersion = -2147418111,
 
 	/**
-	property to get the Capture Interface version
+	Gets the version of the firmware interface that Capture service
+	supports. This can be useful for determining if the Capture service
+	supports a particular hardware feature.
 
 	Device: False	Get Type: None 	Set Type: NotApplicable
 	*/
-	SKTCapturePropertyIDInterfaceVersion = -2147418110,
+	SKTCapturePropertyIDInterfaceVersion = -2147418112,
 
 	/**
 	property to set or get the Capture configuration
@@ -40,49 +45,54 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDConfiguration = -2141913085,
 
 	/**
-	property to set or get the Data Confirmation mode
+	Gets or sets the data confirmation mode. The data confirmation mode
+	determines who acknowledges whether the data received was good or
+	bad.
 
 	Device: False	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDDataConfirmationMode = -2147352572,
 
 	/**
-	property to set or get the Data Confirmation Action
+	Gets or sets the data confirmation action. Data confirmation action
+	determines how good or bad data is acknowledged.
 
 	Device: False	Get Type: None 	Set Type: Ulong
 	*/
 	SKTCapturePropertyIDDataConfirmationAction = -2147287035,
 
 	/**
-	property to set or get the Monitor mode (Debugging purpose)
+	Gets or sets the log level of various Capture service components
+	(Only works on debug builds of the service).
 
 	Device: False	Get Type: Byte 	Set Type: Array
 	*/
 	SKTCapturePropertyIDMonitorMode = -2145124346,
 
 	/**
-	property to get or set the SoftScan status (only for iOS and Android platforms)
+	property to get or set the SoftScan status
+	(iOS only)
 
 	Device: False	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDSoftScanStatus = -2147352569,
 
 	/**
-	property to get a Capture Device version
+	Gets the firmware version of the device
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDVersionDevice = 65536,
 
 	/**
-	property to get a Capture Device type
+	Gets the model of the device
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDDeviceType = 65538,
 
 	/**
-	property to send (get or set) a command using the Device specific commands set
+	Sends an arbitrary get or set command to the device
 
 	Device: True	Get Type: Array 	Set Type: Array
 	*/
@@ -96,7 +106,8 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDDataSourceDevice = 7798788,
 
 	/**
-	property to trigger (set only) a Capture Device read or scan
+	Sets the trigger of the device - can start or stop a read and
+	enable or disable the physical trigger button on the device.
 
 	Device: True	Get Type: NotApplicable 	Set Type: Byte
 	*/
@@ -110,14 +121,16 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDApplyConfigDevice = 1048582,
 
 	/**
-	property to set or get a preamble of a Capture Device decoded data
+	Gets or sets a preamble for data decoded by the device. When set,
+	the preamble is added in front of the decoded data.
 
 	Device: True	Get Type: None 	Set Type: String
 	*/
 	SKTCapturePropertyIDPreambleDevice = 327687,
 
 	/**
-	property to set or get the postamble of a Capture Device decoded data
+	Gets or sets a postamble for data decoded by the device. When set,
+	the postamble is added to the end of the decoded data.
 
 	Device: True	Get Type: None 	Set Type: String
 	*/
@@ -131,7 +144,11 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDCapabilitiesDevice = 2162697,
 
 	/**
-	property to get the Capture Device Change ID
+	Gets the change id of the device. The change id is a checksum of
+	all the engine settings - e.g. symbology settings, preamble,
+	postamble, etc - and can be used to determine if the device
+	configuration has been altered by another application or using a
+	command barcode.
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
@@ -145,7 +162,8 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDDataFormatDevice = 131083,
 
 	/**
-	property to get or set the friendly name of a Capture Device
+	Gets or sets the friendly name of the device. The friendly name is
+	the name that appears in Bluetooth settings.
 
 	Device: True	Get Type: None 	Set Type: String
 	*/
@@ -166,91 +184,113 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDPinCodeDevice = 1376514,
 
 	/**
-	property to set (delete) the Capture Device Pairing Bonding information
+	Set deletes pairing and bonding information off the device. Useful
+	when preparing to pair the Capture device to a different host.
 
 	Device: True	Get Type: NotApplicable 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDDeletePairingBondingDevice = 1179907,
 
 	/**
-	property to set (Restore) the Capture Device Factory Default Settings
+	Set resets all the settings on the device to their default values.
 
 	Device: True	Get Type: NotApplicable 	Set Type: None
 	*/
 	SKTCapturePropertyIDRestoreFactoryDefaultsDevice = 1048836,
 
 	/**
-	 property to set (Power off) the Capture Device power off
+	Set turns the device off
 
 	Device: True	Get Type: NotApplicable 	Set Type: None
 	*/
 	SKTCapturePropertyIDSetPowerOffDevice = 1048837,
 
 	/**
-	property to get the Capture Device Buttons status
+	Gets the current state of each button on the device. Consider using
+	kNotificationsDevice to subscribe to button events instead.
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDButtonsStatusDevice = 65798,
 
 	/**
-	property to get or set the Capture Device Sound Configuration
+	Gets or sets the sound configuration of the device. There are
+	separate sound configurations for when a good scan is acknowledged
+	locally (by the Capture device) and when it is acknowledged by the
+	host. The same applies to the bad scan sound configuration.
 
 	Device: True	Get Type: Byte 	Set Type: Array
 	*/
 	SKTCapturePropertyIDSoundConfigDevice = 2359559,
 
 	/**
-	 property to get or set the Capture Device Timers (Power off timer...)
+	Gets or sets the trigger lock and auto-off timers. The trigger lock
+	determines how long the trigger remains locked after decoding data
+	without receiving confirmation. There are two auto-off timers, one
+	for when the device is connected to a host and one for when it is
+	not.
 
 	Device: True	Get Type: None 	Set Type: Array
 	*/
 	SKTCapturePropertyIDTimersDevice = 262408,
 
 	/**
-	 property to get or set the Capture Device Local (on the device) acknowledgment
+	Gets or sets local device acknowledgement. When enabled, the device
+	acknowledges decoded data as soon as it is decoded. When disabled,
+	the device waits for the host to acknowledge decoded data and the
+	trigger will be locked until acknowledgement is received or the
+	trigger lock timeout has elapsed.
 
 	Device: True	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDLocalAcknowledgmentDevice = 131337,
 
 	/**
-	property to set (confirm) the Capture Device Decoded Data
+	Sends an acknowledgement to the device. Acknowledgement can either
+	be positive or negative - a.k.a. good scan or bad scan.
 
 	Device: True	Get Type: NotApplicable 	Set Type: Ulong
 	*/
 	SKTCapturePropertyIDDataConfirmationDevice = 1245450,
 
 	/**
-	 property to get the Capture Device Battery Level
+	Gets the current battery level of the device. Consider using 
+	kNotificationsDevice to subscribe to battery level change events
+	instead.
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDBatteryLevelDevice = 65803,
 
 	/**
-	property to get or set the Capture Device Local Decode Action
+	Gets or sets the local decode action of the device. Determines how
+	decoded data is acknowledged - i.e. with a beep, rumble, flash or
+	some combination of all three.
 
 	Device: True	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDLocalDecodeActionDevice = 131340,
 
 	/**
-	property to get the Capture Device Bluetooth Address
+	Gets the Bluetooth address of the device
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDBluetoothAddressDevice = 65805,
 
 	/**
-	property to get the Capture Device Statistic Counters
+	Gets the statistics counters of the device. Counters record the
+	absolute number of times a particular event has occurred.
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDStatisticCountersDevice = 65806,
 
 	/**
-	property to get or set the Capture Device Rumble Configuration
+	Gets or sets the rumble configuration of the device. There are
+	separate rumble configurations for when a good scan is acknowledged
+	locally (by the Capture device) and when it is acknowledged by the
+	host. The same applies to the bad scan rumble configuration.
 
 	Device: True	Get Type: Byte 	Set Type: Array
 	*/
@@ -264,21 +304,26 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDProfileConfigDevice = 262416,
 
 	/**
-	property to set (disconnect) the Capture Device dropping off the connection from the host
+	Instructs the device to drop its connection. Note: After sending
+	this command, the host will be unable to send any subsequent
+	commands to this device.
 
 	Device: True	Get Type: NotApplicable 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDDisconnectDevice = 1179921,
 
 	/**
-	property to get or set the Capture Device store
+	Gets or sets arbitrary bytes to store on the device. The device has
+	16 storage locations which can hold up to 64 bytes each.
 
 	Device: True	Get Type: Array 	Set Type: Array
 	*/
 	SKTCapturePropertyIDDataStoreDevice = 4456722,
 
 	/**
-	property to set or get the Capture Device notification setting
+	Gets or sets subscriptions to various events from the device.
+	Events that can be subscribed to include, trigger press/release,
+	power button press/release, power state and battery level change.
 
 	Device: True	Get Type: None 	Set Type: Ulong
 	*/
@@ -292,35 +337,41 @@ typedef NS_ENUM(NSInteger, SKTCapturePropertyID) {
 	SKTCapturePropertyIDConnectReasonDevice = 65812,
 
 	/**
-	property to get the Capture Device Power State
+	Gets the current power state of the device. Consider using
+	kNotificationsDevice to subscribe to power state events instead.
 
 	Device: True	Get Type: None 	Set Type: NotApplicable
 	*/
 	SKTCapturePropertyIDPowerStateDevice = 65813,
 
 	/**
-	property tp get or set the Capture Device Start Up Role SPP
+	Gets or sets the reconnect behavior of the device when it is
+	powered on in application mode. By default, the device will attempt
+	to reconnect to the last host, but this feature can be turned off
+	using this property.
 
 	Device: True	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDStartUpRoleSPPDevice = 131350,
 
 	/**
-	property to get or set the Capture Device Connection Beep Configuration
+	property to get or set the Capture Device Connection Beep
+	Configuration.
 
 	Device: True	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDConnectionBeepConfigDevice = 131351,
 
 	/**
-	property to get or set the Capture Device Flash
+	Gets or sets the status of the flash on the SoftScan device.
 
 	Device: True	Get Type: None 	Set Type: Byte
 	*/
 	SKTCapturePropertyIDFlashDevice = 131352,
 
 	/**
-	property to get or set the Capture Device Overlay View (SoftScan only)
+	property to get or set the Capture Device Overlay View (SoftScan
+	only)
 
 	Device: True	Get Type: None 	Set Type: Object
 	*/

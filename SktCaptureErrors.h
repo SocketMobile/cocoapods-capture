@@ -8,11 +8,20 @@
   @copyright ©2017 Socket Mobile, inc.
 */
 
+#ifndef __SKTCAPTUREERRORS_H
+#define __SKTCAPTUREERRORS_H
+
 /**
   macro to use to know if the result is
   successful
 */
 #define SKTSUCCESS(result) (result>=0)
+
+/**
+  macro to execute code only if the previous result
+  was successful
+*/
+#define SKTCHECKSUCCESS(result,Expression) SKTSUCCESS(result)?result=Expression:result
 
 /**
   define the error codes used by Capture.
@@ -28,7 +37,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_WAITTIMEOUT = 1,
 
 	/**
-	This operation is already done
+	This operation is already complete
 	*/
 	SKTCaptureE_ALREADYDONE = 2,
 
@@ -163,7 +172,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_UNABLEDEINITIALIZE = -22,
 
 	/**
-	The configuration is unkonwn
+	The configuration is unknown
 	*/
 	SKTCaptureE_UNKNOWNCONFIGURATION = -23,
 
@@ -173,7 +182,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_INVALIDCONFIGURATION = -24,
 
 	/**
-	This item is already existing
+	Creating or adding an item that already exists
 	*/
 	SKTCaptureE_ALREADYEXISTING = -25,
 
@@ -238,7 +247,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_COMMANDDENIED = -37,
 
 	/**
-	There is an error during the communication
+	There was an error during communication
 	*/
 	SKTCaptureE_COMMUNICATIONERROR = -38,
 
@@ -273,7 +282,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_WRONGPROTOCOL = -44,
 
 	/**
-	The queue has been reseted
+	The queue has been reset
 	*/
 	SKTCaptureE_QUEUERESETED = -45,
 
@@ -288,7 +297,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_NOTHINGTOLISTEN = -47,
 
 	/**
-	The current version is out dated
+	The current version is outdated
 	*/
 	SKTCaptureE_OUTDATEDVERSION = -48,
 
@@ -298,7 +307,7 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_INVALIDXMLTAG = -49,
 
 	/**
-	The HID changes cannot be registered
+	Cannot register for  HID change notifications
 	*/
 	SKTCaptureE_UNABLEREGISTERFORHIDCHANGES = -50,
 
@@ -368,6 +377,35 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_UNABLEREADHIDINFO = -70,
 
 	/**
+	The profile file causes a conflict
+	THIS ERROR IS DEPREACTED
+	*/
+	SKTCaptureE_CONFLICTPROFILE = -80,
+
+	/**
+	The current profile cannot be deleted
+	THIS ERROR IS DEPREACTED
+	*/
+	SKTCaptureE_DELETECURRENTPROFILE = -81,
+
+	/**
+	Data editing cannot be initialized
+	THIS ERROR IS DEPREACTED
+	*/
+	SKTCaptureE_UNABLEINITIALIZEDATAEDITING = -82,
+
+	/**
+	The data editing operation is invalid
+	THIS ERROR IS DEPREACTED
+	*/
+	SKTCaptureE_UNKNOWNDATAEDITINGOPERATION = -83,
+
+	/**
+	The number of parameters is incorrect
+	*/
+	SKTCaptureE_INCORRECTNUMBEROFPARAMETERS = -84,
+
+	/**
 	The specified format is invalid
 	*/
 	SKTCaptureE_INVALIDFORMAT = -85,
@@ -398,9 +436,11 @@ typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	SKTCaptureE_EXPIRED = -92,
 
 	/**
-	The App information are invalid
+	The AppInfo information is invalid
 	*/
 	SKTCaptureE_INVALIDAPPINFO = -93,
 
 };
+
+#endif
 
