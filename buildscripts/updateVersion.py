@@ -8,7 +8,7 @@ import subprocess
 def updateVersionFiles(files, newVersion, versionPrefix):
     year = time.strftime('%Y')
     regexVersion = versionPrefix + '\d*\.\d*\.\d*'
-    regexYear = 'Copyright \d\w+ Socket'
+    regexYear = ' \d+ Socket Mobile, Inc.'
     for file in files:
         print 'updating the version in the ' + file + ' to ' + newVersion
         with open(file, 'r') as src:
@@ -16,7 +16,7 @@ def updateVersionFiles(files, newVersion, versionPrefix):
             lines = src.readlines()
             for line in lines:
                 line = re.sub(regexVersion, versionPrefix + newVersion, line)
-                line = re.sub(regexYear, 'Copyright ' + year + ' Socket', line)
+                line = re.sub(regexYear, ' ' + year + ' Socket Mobile, Inc.', line)
                 trg.write(line)
             trg.close()
         os.remove(file)
