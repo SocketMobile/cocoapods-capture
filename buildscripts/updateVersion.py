@@ -23,7 +23,7 @@ def updateVersionFiles(files, newVersion, versionPrefix):
         os.rename(file + '-new', file)
 
 def updateFiles(targetDirectory, newVersion):
-    files = glob.glob(targetDirectory + '/*.txt')
+    files = glob.glob(targetDirectory + '/README.md')
     updateVersionFiles(files, newVersion, 'Version ')
     files = glob.glob(targetDirectory + '/*.podspec')
     updateVersionFiles(files, newVersion, '')

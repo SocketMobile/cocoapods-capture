@@ -687,7 +687,15 @@ typedef NS_ENUM(NSInteger, SKTCaptureDataFormat)
     /** data format without protocol fields */
     SKTCaptureDataFormatRaw=0,
     /** data format respecting the protocol format */
-    SKTCaptureDataFormatPacket=1
+    SKTCaptureDataFormatPacket=1,
+    /* Used to display only the ID of card. Developers cannot manually set this format type unless they scan a card that does this */
+    SKTCaptureDataFormatIdOnly=2,
+    /* Used to read the Tag Type as well as the ID of the card */
+    SKTCaptureDataFormatTagTypeAndId=10,
+    /* Used to read only the data on the card. Developers cannot manually set this for the same reason */
+    SKTCaptureDataFormatDataOnly=4,
+    /* Used to read the Tag Type as well as the data on the card */
+    SKTCaptureDataFormatTagTypeAndData=12
 };
 
 /**
