@@ -851,15 +851,19 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// will call the didNotifyArrivalForDevice if the delegate pushed supports
     /// this in its protocol.
     ///
-    /// - Parameter delegate: reference to a delegate to push in the delegates stack
-    open func pushDelegate(_ delegate: CaptureHelperDelegate){
+    /// - Parameter delegate : reference to a delegate to push in the delegates stack
+    /// - Returns:
+    ///     hasBeenPushed : true is the delegate has been pushed, false otherwise
+    open func pushDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
+        var hasBeenPushed = false
         // make sure the currentDelegate if not nil
         // that is not equal to delegate passed in argument
         if let current = currentDelegate {
             if (current as AnyObject === delegate as AnyObject) {
-                return
+                return hasBeenPushed
             }
         }
+        hasBeenPushed = true
         delegatesStack.append(delegate)
         currentDelegate = delegate
 
@@ -885,20 +889,30 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                 }
             }
         }
+        return hasBeenPushed
     }
 
 
     /// remove the delegate from the delegates stack
     ///
-    /// - Parameter delegate: reference to the class that
-    /// receive the Capture Delegates
-    open func popDelegate(_ delegate: CaptureHelperDelegate){
-        let last = delegatesStack.removeLast()
-        if (last as AnyObject === delegate as AnyObject) {
-            currentDelegate = delegatesStack.last
-        } else {
-            delegatesStack.append(last)
+    /// - Parameter delegate: reference to the class that receive
+    /// the Capture Delegates
+    ///
+    /// - Returns:
+    /// hasBeenPoped is true if the delegate has been poped from the
+    //  delegates stack, false otherwise
+    open func popDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
+        var hasBeenRemoved = false
+        if delegatesStack.count > 0 {
+            let last = delegatesStack.removeLast()
+            if (last as AnyObject === delegate as AnyObject) {
+                hasBeenRemoved = true
+                currentDelegate = delegatesStack.last
+            } else {
+                delegatesStack.append(last)
+            }
         }
+        return hasBeenRemoved
     }
 
 

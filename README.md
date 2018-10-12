@@ -1,4 +1,4 @@
-# Capture SDK Version 1.1.6
+# Capture SDK Version 1.1.24
 
 Socket Mobile is a leading innovator of data capture and delivery solutions for
 enhanced productivity.
@@ -43,7 +43,7 @@ your project is `myProject`:
 
 ```ruby
         target 'myProject'
-          pod 'SKTCapture', '~> 1.0'
+          pod 'SKTCapture', '~> 1.1'
 ```
 
 Once you have saved this file, from the terminal command prompt, type the
@@ -141,7 +141,7 @@ onDecodedData delegate.
 
 ### Summary for integrating Capture in Xcode project is a simple 6 steps process:
 
-1. Add `pod 'SKTCapture', '~>1.0'` in the file Podfile located at the same
+1. Add `pod 'SKTCapture', '~>1.1'` in the file Podfile located at the same
 level than the application .xcproj file.
 Make sure this file first line is giving the name of the application .xcproj
 file: `target 'myProject'`.
@@ -169,7 +169,7 @@ events.
 Example of Podfile for SingleEntry app:
 ```ruby
   target SingleEntry
-    pod 'SKTCapture', '~>1.0'
+    pod 'SKTCapture', '~>1.1'
 ```
 
 Example of ViewController.m for SingleEntry app:

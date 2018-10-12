@@ -1,6 +1,17 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.1.24](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.24)
+### New
+  n/a
+  
+### Improvements
+  * CaptureHelper pushDelegate and popDelegate now returns a boolean when the
+    delegate has been added or removed respectively.
+
+### Bug fixes
+  * Fix D600 reading of the Local Decode Action property, when the default has not changed.
+
 ## [Version 1.1.6](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.6)
 ### New
   * D600 support for data format (Tag ID or NDEF Data)
@@ -12,7 +23,7 @@ This file tracks released versions with the changes made to this project.
   * D600 API for UI controls (BEEP, LED†, VIBRATE)
     † the LED is not fully operational on D600.
 
-  * D600 API for device specific command. A firmware command can be sent 
+  * D600 API for device specific command. A firmware command can be sent
     directly through Capture API
 
 ### Improvements
