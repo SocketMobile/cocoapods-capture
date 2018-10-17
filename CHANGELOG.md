@@ -1,10 +1,21 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.1.27](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.27)
+### New
+  n/a
+
+### Improvements
+  * CaptureHelper pushDelegate and popDelegate that returns a boolean are marked with
+    discardable result to avoid a warning.
+
+### Bug fixes
+  * n/a
+
 ## [Version 1.1.24](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.24)
 ### New
   n/a
-  
+
 ### Improvements
   * CaptureHelper pushDelegate and popDelegate now returns a boolean when the
     delegate has been added or removed respectively.

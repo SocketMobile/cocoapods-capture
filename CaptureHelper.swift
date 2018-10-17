@@ -854,7 +854,7 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Parameter delegate : reference to a delegate to push in the delegates stack
     /// - Returns:
     ///     hasBeenPushed : true is the delegate has been pushed, false otherwise
-    open func pushDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
+    @discardableResult open func pushDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
         var hasBeenPushed = false
         // make sure the currentDelegate if not nil
         // that is not equal to delegate passed in argument
@@ -901,7 +901,7 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Returns:
     /// hasBeenPoped is true if the delegate has been poped from the
     //  delegates stack, false otherwise
-    open func popDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
+    @discardableResult open func popDelegate(_ delegate: CaptureHelperDelegate) -> Bool {
         var hasBeenRemoved = false
         if delegatesStack.count > 0 {
             let last = delegatesStack.removeLast()
