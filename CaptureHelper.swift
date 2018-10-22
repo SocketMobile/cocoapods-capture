@@ -125,14 +125,14 @@ public protocol CaptureHelperDevicePowerDelegate: CaptureHelperDelegate {
 
 
 /// Capture Helper protocol to comply in order to receive the buttons state
-public protocol CaptureHelperButtonsDelegate : CaptureHelperDelegate {
+public protocol CaptureHelperDeviceButtonsDelegate : CaptureHelperDelegate {
 
     /// delegate called when the state of the device's buttons has changed
     ///
     /// - Parameters:
     ///   - buttonsState: contains the new buttons state
     ///   - device: contains the device information from which the buttons state has changed
-    func didChangeButtonsState(_ buttonsState: SKTCaptureButtonsState, forDevice device: CaptureHelperDelegate)
+    func didChangeButtonsState(_ buttonsState: SKTCaptureButtonsState, forDevice device: CaptureHelperDevice)
 }
 
 /// Capture Helper protocol to comply in order to receive all the Capture delegates
@@ -140,7 +140,7 @@ public protocol CaptureHelperButtonsDelegate : CaptureHelperDelegate {
 /// coming from Capture
 public protocol CaptureHelperAllDelegate : CaptureHelperErrorDelegate, CaptureHelperDevicePresenceDelegate,
     CaptureHelperDevicePowerDelegate, CaptureHelperDeviceDecodedDataDelegate,
-CaptureHelperButtonsDelegate {
+CaptureHelperDeviceButtonsDelegate {
 
 }
 
@@ -1156,6 +1156,22 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                 }
             }
             break
+        case SKTCaptureEventID.buttons:
+            if let deviceFound = self.devices[capture] {
+                if let delegate = currentDelegate as? CaptureHelperDeviceButtonsDelegate {
+                    if let value = event.data?.byteValue {
+                        let finalValue = SKTCaptureButtonsState(rawValue: Int(value))
+                        if let dq = self.delegateDispatchQueue {
+                            dq.async{
+                                delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
+                            }
+                        } else {
+                            delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
+                        }
+                    }
+                }
+            }
+            break;
         default: break
             // not much to do
         }

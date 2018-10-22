@@ -1,6 +1,18 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.1.31](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.31)
+### New
+  n/a
+
+### Improvements
+  n/a
+
+### Bug fixes
+  * Fix the button press notifications
+
+  * Rename CaptureHelperButtonsDelegate to CaptureHelperDeviceButtonsDelegate to be consistent with the naming of other delegates.
+
 ## [Version 1.1.27](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.27)
 ### New
   n/a
