@@ -63,6 +63,8 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceProductId) {
     SKTCaptureDeviceProductId8ciSeries,
     /** product of 8qi Series */
     SKTCaptureDeviceProductId8qiSeries,
+    /** product of S840 Series */
+    SKTCaptureDeviceProductIdS840Series,
     /** product of D700 Series */
     SKTCaptureDeviceProductIdD700Series,
     /** product of D730 Series */
@@ -135,6 +137,9 @@ typedef NS_ENUM (NSInteger, SKTCaptureDeviceType) {
     /** Scanner 8qi device type */
     SKTCaptureDeviceTypeScanner8qi = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductId8qiSeries,
+    /** Scanner S840 device type */
+    SKTCaptureDeviceTypeScannerS840 = SKTCaptureDeviceTypeClassDevice<< 24 |
+    SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdS840Series,
     /** Scanner D700 device type */
     SKTCaptureDeviceTypeScannerD700 = SKTCaptureDeviceTypeClassDevice<< 24 |
     SKTCaptureDeviceInterfaceTypeBluetooth<<16 | SKTCaptureDeviceProductIdD700Series,
@@ -557,15 +562,17 @@ extern NSString* _Nonnull SKTCaptureSoftScanCamera; // "front" "back"
  */
 typedef NS_OPTIONS(NSInteger, SKTCaptureButtonsState)
 {
-    /** the left button has its state changed */
+    /** when there is no button pressed */
+    SKTCaptureButtonsStateNone=0x00,
+    /** the left button is pressed */
     SKTCaptureButtonsStateLeft=0x01,
-    /** the right button has its state changed */
+    /** the right button is pressed */
     SKTCaptureButtonsStateRight=0x02,
-    /** the middle button has its state changed */
+    /** the middle button is pressed */
     SKTCaptureButtonsStateMiddle=0x04,
-    /** the power button has its state changed */
+    /** the power button is pressed */
     SKTCaptureButtonsStatePower=0x08,
-    /** the ring detach state has changed (Series 9 only) */
+    /** the ring is a in detached state (Series 9 only) */
     SKTCaptureButtonsStateRingDetach=0x10
 };
 
