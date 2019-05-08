@@ -1,7 +1,29 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
-## [Version 1.1.148](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.148)
+## [Version 1.1.286](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.286)
+### New
+  * compiled with Xcode 10.2.1
+
+  * CaptureHelper and CaptureHelperDevice have now generic getProperty, setProperty methods that could be use for the Capture properties that don't have already a method in CaptureHelper or CaptureHelperDevice
+
+### Improvements
+  * Add a generic get/set properties in CaptureHelper and CaptureHelperDevice so it is easy to extend these classes and it simplifies the code too
+
+  * Empty buffer in iAP protocol when some partial data are received
+
+### Bug fixes
+  * Fix the openWithAppInfo that uses to call twice the block in case of failure
+
+  * Fix the partial decoded data occurring on some scanners when scanning long barcode before the scanner beeps when it is ready
+
+  * Fix the failure to reconnect to the scanner when asking the battery status as soon as the scanner connects
+
+  * Increase the timeout in Capture Service Direct, to be bigger than the Capture property timeout
+
+  * Check if the main capture reference is not nil and neither is its devices list
+
+## [Version 1.1.148](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.148)
 ### New
   * Add a device type for the S840
 
@@ -21,7 +43,7 @@ This file tracks released versions with the changes made to this project.
 ### Bug fixes
   * Fix a crash that occurred sometimes when setting or getting a device property
 
-## [Version 1.1.33](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.33)
+## [Version 1.1.33](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.33)
 ### New
   n/a
 
@@ -31,7 +53,7 @@ This file tracks released versions with the changes made to this project.
 ### Bug fixes
   * Fix the missing architectures armv7 and arm64 in the 1.1.31 release
 
-## [Version 1.1.31](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.31)
+## [Version 1.1.31](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.31)
 ### New
   n/a
 
@@ -43,7 +65,7 @@ This file tracks released versions with the changes made to this project.
 
   * Rename CaptureHelperButtonsDelegate to CaptureHelperDeviceButtonsDelegate to be consistent with the naming of other delegates.
 
-## [Version 1.1.27](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.27)
+## [Version 1.1.27](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.27)
 ### New
   n/a
 
@@ -54,7 +76,7 @@ This file tracks released versions with the changes made to this project.
 ### Bug fixes
   * n/a
 
-## [Version 1.1.24](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.24)
+## [Version 1.1.24](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.24)
 ### New
   n/a
 
@@ -65,7 +87,7 @@ This file tracks released versions with the changes made to this project.
 ### Bug fixes
   * Fix D600 reading of the Local Decode Action property, when the default has not changed.
 
-## [Version 1.1.6](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.1.6)
+## [Version 1.1.6](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.6)
 ### New
   * D600 support for data format (Tag ID or NDEF Data)
 
@@ -90,7 +112,7 @@ This file tracks released versions with the changes made to this project.
 
   * Fix D600 reading tag data that are longer than 19 bytes
 
-## [Version 1.0.341](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.341)
+## [Version 1.0.341](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.341)
 ### New
   * Added new Socket product types
 
@@ -103,7 +125,7 @@ This file tracks released versions with the changes made to this project.
   * Fix the 10s delay when closing Capture while a scanner is connected.
 
 
-## [Version 1.0.151](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.151)
+## [Version 1.0.151](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.151)
 
 ### New
 n/a
@@ -114,7 +136,7 @@ n/a
 ### Bug fixes
   * Fix crash occurring when cancelling the pairing of a D600.
 
-## [Version 1.0.117](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.117)  
+## [Version 1.0.117](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.117)  
 
 ### New
 n/a
@@ -133,7 +155,7 @@ n/a
   * Fix the scanner long reconnection time.
 
 
-## [Version 1.0.67](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.67)  
+## [Version 1.0.67](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.67)  
 
 ### New
 n/a
@@ -144,7 +166,7 @@ n/a
 ### Bug fixes
   * Fix the AppKey crash when opening the Capture SDK.
 
-## [Version 1.0.65](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.65)  
+## [Version 1.0.65](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.65)  
 
 ### New
 n/a
@@ -157,7 +179,7 @@ n/a
 
   * Add notification of already connected devices when pushing a delegate
 
-## [Version 1.0.61](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.61)  
+## [Version 1.0.61](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.61)  
 
 ### New
 n/a
@@ -168,7 +190,7 @@ n/a
 ### Bug fixes
   * Fix a crash when closing Capture
 
-## [Version 1.0.32](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.32)
+## [Version 1.0.32](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.32)
 
 ### New
 n/a
@@ -184,7 +206,7 @@ n/a
   * Fix a bug when enabling SoftScan at the same time than enabling/disabling
     D600 support.
 
-## [Version 1.0.0](https://github.com/SocketMobile/cocoapods-capture-obj-c/releases/tag/1.0.0)  
+## [Version 1.0.0](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.0.0)  
 
 ### New
   * initial commit

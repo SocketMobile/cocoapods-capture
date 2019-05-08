@@ -185,14 +185,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .friendlyNameDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.stringValue)
-                }
-            } else {
-                completion(result, propertyResult?.stringValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.stringValue)
         }
     }
 
@@ -208,14 +202,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .friendlyNameDevice
         property.type = .string
         property.stringValue = name
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -226,14 +214,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .bluetoothAddressDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.arrayValue)
-                }
-            } else {
-                completion(result, propertyResult?.arrayValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.arrayValue)
         }
     }
 
@@ -245,13 +227,7 @@ public class CaptureHelperDevice : NSObject {
         property.id = .deviceType
         property.type = .none
         capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.uLongValue)
-                }
-            } else {
-                completion(result, propertyResult?.uLongValue)
-            }
+            completion(result, propertyResult?.uLongValue)
         }
     }
 
@@ -262,14 +238,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .versionDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.version)
-                }
-            } else {
-                completion(result, propertyResult?.version)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.version)
         }
     }
 
@@ -283,14 +253,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .batteryLevelDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.uLongValue)
-                }
-            } else {
-                completion(result, propertyResult?.uLongValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.uLongValue)
         }
     }
 
@@ -304,14 +268,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .powerStateDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.uLongValue)
-                }
-            } else {
-                completion(result, propertyResult?.uLongValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.uLongValue)
         }
     }
 
@@ -324,20 +282,14 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .buttonsStatusDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var buttonsState = nil as SKTCaptureButtonsState?
             if result == SKTCaptureErrors.E_NOERROR {
                 if let byteValue = propertyResult?.byteValue {
                     buttonsState = SKTCaptureButtonsState(rawValue: Int(byteValue))
                 }
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, buttonsState)
-                }
-            } else {
-                completion(result, buttonsState)
-            }
+            completion(result, buttonsState)
         }
     }
 
@@ -348,20 +300,14 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .standConfigDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var standConfig = nil as SKTCaptureStandConfig?
             if result == SKTCaptureErrors.E_NOERROR {
                 if let ulongValue = propertyResult?.uLongValue {
                     standConfig = SKTCaptureStandConfig(rawValue: Int(ulongValue))
                 }
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, standConfig)
-                }
-            } else {
-                completion(result, standConfig)
-            }
+            completion(result, standConfig)
         }
     }
 
@@ -375,14 +321,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .standConfigDevice
         property.type = .ulong
         property.uLongValue = UInt(config.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -393,20 +333,14 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .localDecodeActionDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var decodeAction = nil as SKTCaptureLocalDecodeAction?
             if result == SKTCaptureErrors.E_NOERROR {
                 if let byteValue = propertyResult?.byteValue {
                     decodeAction = SKTCaptureLocalDecodeAction(rawValue: Int(byteValue))
                 }
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, decodeAction)
-                }
-            } else {
-                completion(result, decodeAction)
-            }
+            completion(result, decodeAction)
         }
     }
 
@@ -420,14 +354,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .localDecodeActionDevice
         property.type = .byte
         property.byteValue = Int8(decodeAction.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -438,20 +366,14 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .dataConfirmationDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var dataAck = nil as SKTCaptureDeviceDataAcknowledgment?
             if result == SKTCaptureErrors.E_NOERROR {
                 if let uLongValue = propertyResult?.uLongValue {
                     dataAck = SKTCaptureDeviceDataAcknowledgment(rawValue: Int(uLongValue))
                 }
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, dataAck)
-                }
-            } else {
-                completion(result, dataAck)
-            }
+            completion(result, dataAck)
         }
     }
 
@@ -465,14 +387,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .dataConfirmationDevice
         property.type = .ulong
         property.uLongValue = UInt(dataAcknowledgment.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -483,14 +399,8 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .postambleDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.stringValue)
-                }
-            } else {
-                completion(result, propertyResult?.stringValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.stringValue)
         }
     }
 
@@ -504,14 +414,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .postambleDevice
         property.type = .string
         property.stringValue = postamble
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -529,14 +433,8 @@ public class CaptureHelperDevice : NSObject {
         dataSource.id = dataSourceId
         dataSource.flags = .status
         property.dataSource = dataSource
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.dataSource)
-                }
-            } else {
-                completion(result, propertyResult?.dataSource)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.dataSource)
         }
     }
 
@@ -550,14 +448,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .dataSourceDevice
         property.type = .dataSource
         property.dataSource = dataSource
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -575,14 +467,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .triggerDevice
         property.type = .byte
         property.byteValue = Int8(trigger.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -607,14 +493,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .dataConfirmationDevice
         property.type = .ulong
         property.uLongValue = UInt(SKTHelper.getDataComfirmation(withReserve: 0, withRumble: rumble.rawValue, withBeep: beep.rawValue, withLed: led.rawValue))
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -628,14 +508,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .notificationsDevice
         property.type = .ulong
         property.uLongValue = UInt(notifications.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -646,18 +520,12 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .notificationsDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var notifications = nil as SKTCaptureNotifications?
             if let longValue = propertyResult?.uLongValue {
                 notifications = SKTCaptureNotifications(rawValue: Int(longValue))
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, notifications)
-                }
-            } else {
-                completion(result, notifications)
-            }
+            completion(result, notifications)
         }
     }
 
@@ -671,14 +539,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .overlayViewDevice
         property.type = .object
         property.object = parameters as NSObject
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -689,18 +551,12 @@ public class CaptureHelperDevice : NSObject {
         let property = SKTCaptureProperty()
         property.id = .overlayViewDevice
         property.type = .none
-        capture.getProperty(property) { (result, propertyResult) in
+        getProperty(property) { (result, propertyResult) in
             var parameters = nil as Dictionary<String,Any>?
             if let obj = propertyResult?.object {
                 parameters = obj as? Dictionary<String,Any>
             }
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, parameters)
-                }
-            } else {
-                completion(result, parameters)
-            }
+            completion(result, parameters)
         }
     }
 
@@ -718,14 +574,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .deviceSpecific
         property.type = .array
         property.arrayValue = command
-        capture.getProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(result, propertyResult?.arrayValue)
-                }
-            } else {
-                completion(result, propertyResult?.arrayValue)
-            }
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.arrayValue)
         }
     }
     
@@ -738,14 +588,8 @@ public class CaptureHelperDevice : NSObject {
         property.id = .dataFormatDevice
         property.type = .byte
         property.byteValue = Int8(dataFormat.rawValue)
-        capture.setProperty(property) { (result, propertyResult) in
-            if let dq = self.dispatchQueue {
-                dq.async {
-                    completion(result)
-                }
-            } else {
-                completion(result)
-            }
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
     
@@ -759,17 +603,51 @@ public class CaptureHelperDevice : NSObject {
         property.id = .dataFormatDevice
         property.type = .none
         
-        capture.getProperty(property) {(result, propertyResult) in
+        getProperty(property) {(result, propertyResult) in
             var dataFormat = nil as SKTCaptureDataFormat?
             if let byteValue = propertyResult?.byteValue {
                 dataFormat = SKTCaptureDataFormat(rawValue: Int(byteValue))
             }
+            completion(result, dataFormat)
+        }
+    }
+    
+    /// get a property using the Capture property object
+    ///
+    /// Usually the get property sends a property without arguments but
+    /// the response in case of success contains a property response that
+    /// holds the eventual arguments of the property.
+    /// - Parameters:
+    ///     - property: reference to the property to set
+    ///     - completion: receiving the result and the device specific command response if the result is successful
+    open func getProperty(_ property: SKTCaptureProperty, withCompletionHandler completion: @escaping(_ result: SKTResult, _ complete: SKTCaptureProperty?)->Void){
+        capture.getProperty(property) {(result, propertyResult) in
             if let dq = self.dispatchQueue {
                 dq.async{
-                    completion(result, dataFormat)
+                    completion(result, propertyResult)
                 }
             } else {
-                completion(result, dataFormat)
+                completion(result, propertyResult)
+            }
+        }
+    }
+    
+    /// set a property using the Capture property object
+    ///
+    /// Usually the set property does not return any property arguments,
+    /// only the result is interesting to check to know if the set property
+    /// has been successful.
+    /// - Parameters:
+    ///     - property: reference to the property to set
+    ///     - completion: receiving the result and the device specific command response if the result is successful
+    open func setProperty(_ property: SKTCaptureProperty, withCompletionHandler completion: @escaping(_ result: SKTResult, _ complete: SKTCaptureProperty?)->Void){
+        capture.setProperty(property) { (result, propertyResult) in
+            if let dq = self.dispatchQueue {
+                dq.async {
+                    completion(result, propertyResult)
+                }
+            } else {
+                completion(result, propertyResult)
             }
         }
     }
@@ -1224,28 +1102,11 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Parameter completion: called upon completion of getting the Capture version
     /// with the result and the version as argument.
     open func getVersionWithCompletionHandler(_ completion:@escaping(_ result: SKTResult, _ version: SKTCaptureVersion?)->Void){
-        if let cap = capture {
-            let property = SKTCaptureProperty()
-            property.id = .version
-            property.type = .none
-            cap.getProperty(property) { (result, propertyResult) in
-                if let dq = self.dispatchQueue {
-                    dq.async{
-                        completion(result, propertyResult?.version)
-                    }
-                } else {
-                    completion(result, propertyResult?.version)
-                }
-            }
-        }
-        else {
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-                }
-            } else {
-                completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-            }
+        let property = SKTCaptureProperty()
+        property.id = .version
+        property.type = .none
+        getProperty(property) { (result, propertyResult) in
+            completion(result, propertyResult?.version)
         }
     }
 
@@ -1255,32 +1116,15 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Parameter completion: called upon completion of getting the confirmation mode
     /// with the result and the confirmation mode as argument.
     open func getConfirmationModeWithCompletionHandler(_ completion: @escaping(_ result: SKTResult, _ confirmationMode: SKTCaptureDataConfirmation?)->Void){
-        if let cap = capture {
-            let property = SKTCaptureProperty()
-            property.id = .dataConfirmationMode
-            property.type = .none
-            cap.getProperty(property) { (result, propertyResult) in
-                var confirmation = nil as SKTCaptureDataConfirmation?
-                if let byteValue = propertyResult?.byteValue {
-                    confirmation = SKTCaptureDataConfirmation(rawValue: Int(byteValue))
-                }
-                if let dq = self.dispatchQueue {
-                    dq.async{
-                        completion(result, confirmation)
-                    }
-                } else {
-                    completion(result, confirmation)
-                }
+        let property = SKTCaptureProperty()
+        property.id = .dataConfirmationMode
+        property.type = .none
+        getProperty(property) { (result, propertyResult) in
+            var confirmation = nil as SKTCaptureDataConfirmation?
+            if let byteValue = propertyResult?.byteValue {
+                confirmation = SKTCaptureDataConfirmation(rawValue: Int(byteValue))
             }
-        }
-        else {
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-                }
-            } else {
-                completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-            }
+            completion(result, confirmation)
         }
     }
 
@@ -1291,29 +1135,12 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     ///   - completion: called upon completion of setting the confirmation mode
     /// with the result of setting the confirmation mode.
     open func setConfirmationMode(_ confirmationMode: SKTCaptureDataConfirmation, withCompletionHandler completion: @escaping(_ result: SKTResult)->Void){
-        if let cap = capture {
-            let property = SKTCaptureProperty()
-            property.id = .dataConfirmationMode
-            property.type = .byte
-            property.byteValue = Int8(confirmationMode.rawValue)
-            cap.setProperty(property) { (result, propertyResult) in
-                if let dq = self.dispatchQueue {
-                    dq.async{
-                        completion(result)
-                    }
-                } else {
-                    completion(result)
-                }
-            }
-        }
-        else {
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(SKTCaptureErrors.E_INVALIDHANDLE)
-                }
-            } else {
-                completion(SKTCaptureErrors.E_INVALIDHANDLE)
-            }
+        let property = SKTCaptureProperty()
+        property.id = .dataConfirmationMode
+        property.type = .byte
+        property.byteValue = Int8(confirmationMode.rawValue)
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
         }
     }
 
@@ -1323,32 +1150,15 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     /// - Parameter completion: called upon completion of getting the SoftScan status with
     /// result and SoftScan status as argument.
     open func getSoftScanStatusWithCompletionHandler(_ completion: @escaping(_ result: SKTResult, _ status: SKTCaptureSoftScan?)->Void){
-        if let cap = capture {
-            let property = SKTCaptureProperty()
-            property.id = .softScanStatus
-            property.type = .none
-            cap.getProperty(property) { (result, propertyResult) in
-                var status = nil as SKTCaptureSoftScan?
-                if let byteValue = propertyResult?.byteValue {
-                    status = SKTCaptureSoftScan(rawValue: Int(byteValue))
-                }
-                if let dq = self.dispatchQueue {
-                    dq.async{
-                        completion(result, status)
-                    }
-                } else {
-                    completion(result, status)
-                }
+        let property = SKTCaptureProperty()
+        property.id = .softScanStatus
+        property.type = .none
+        getProperty(property) { (result, propertyResult) in
+            var status = nil as SKTCaptureSoftScan?
+            if let byteValue = propertyResult?.byteValue {
+                status = SKTCaptureSoftScan(rawValue: Int(byteValue))
             }
-        }
-        else {
-            if let dq = self.dispatchQueue {
-                dq.async{
-                    completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-                }
-            } else {
-                completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
-            }
+            completion(result, status)
         }
     }
 
@@ -1360,28 +1170,73 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     ///   - completion: called upon completion of setting the SoftScan status with the
     /// result as argument.
     open func setSoftScanStatus(_ status: SKTCaptureSoftScan, withCompletionHandler completion: @escaping(_ result: SKTResult)->Void){
+        let property = SKTCaptureProperty()
+        property.id = .softScanStatus
+        property.type = .byte
+        property.byteValue = Int8(status.rawValue)
+        setProperty(property) { (result, propertyResult) in
+            completion(result)
+        }
+    }
+    
+    /// get a property using the Capture property object
+    ///
+    /// Usually the get property sends a property without arguments but
+    /// the response in case of success contains a property response that
+    /// holds the eventual arguments of the property.
+    /// - Parameters:
+    ///     - property: reference to the property to set
+    ///     - completion: receiving the result and the device specific command response if the result is successful
+    open func getProperty(_ property: SKTCaptureProperty, withCompletionHandler completion: @escaping(_ result: SKTResult, _ complete: SKTCaptureProperty?)->Void){
         if let cap = capture {
-            let property = SKTCaptureProperty()
-            property.id = .softScanStatus
-            property.type = .byte
-            property.byteValue = Int8(status.rawValue)
-            cap.setProperty(property) { (result, propertyResult) in
+            cap.getProperty(property) { (result, propertyResult) in
                 if let dq = self.dispatchQueue {
                     dq.async{
-                        completion(result)
+                        completion(result, propertyResult)
                     }
                 } else {
-                    completion(result)
+                    completion(result, propertyResult)
                 }
             }
         }
         else {
             if let dq = self.dispatchQueue {
                 dq.async{
-                    completion(SKTCaptureErrors.E_INVALIDHANDLE)
+                    completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
                 }
             } else {
-                completion(SKTCaptureErrors.E_INVALIDHANDLE)
+                completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
+            }
+        }
+    }
+    
+    /// set a property using the Capture property object
+    ///
+    /// Usually the set property does not return any property arguments,
+    /// only the result is interesting to check to know if the set property
+    /// has been successful.
+    /// - Parameters:
+    ///     - property: reference to the property to set
+    ///     - completion: receiving the result and the device specific command response if the result is successful
+    open func setProperty(_ property: SKTCaptureProperty, withCompletionHandler completion: @escaping(_ result: SKTResult, _ complete: SKTCaptureProperty?)->Void){
+        if let cap = capture {
+            cap.setProperty(property) { (result, propertyResult) in
+                if let dq = self.dispatchQueue {
+                    dq.async{
+                        completion(result, propertyResult)
+                    }
+                } else {
+                    completion(result, propertyResult)
+                }
+            }
+        }
+        else {
+            if let dq = self.dispatchQueue {
+                dq.async{
+                    completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
+                }
+            } else {
+                completion(SKTCaptureErrors.E_INVALIDHANDLE, nil)
             }
         }
     }
