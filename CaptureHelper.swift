@@ -927,9 +927,9 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                         if let dev = device {
                             let newDevice = CaptureHelperDevice(deviceInfo: deviceInfo, capture: dev)
                             self.devices[dev] = newDevice
+                            newDevice.dispatchQueue = self.dispatchQueue
                             if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
                                 if let dq = self.dispatchQueue {
-                                    newDevice.dispatchQueue = dq
                                     dq.async{
                                         delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
                                     }
@@ -970,9 +970,9 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                         if let dev = device {
                             let newDevice = CaptureHelperDeviceManager(deviceInfo: deviceInfo, capture: dev)
                             self.deviceManagers[dev] = newDevice
+                            newDevice.dispatchQueue = self.dispatchQueue
                             if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
                                 if let dq = self.dispatchQueue {
-                                    newDevice.dispatchQueue = dq
                                     dq.async{
                                         delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
                                     }

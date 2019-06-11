@@ -1,6 +1,16 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.1.296](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.296)
+### New
+  * n/a
+
+### Improvements
+  * D600 Data Store supported
+
+### Bug fixes
+  * Capture Helper UI context switch fixed when the first view in the delegates stack does not handle the device presence delegate, like the SingleEntrySwift app in Github.com/SocketMobile.
+
 ## [Version 1.1.286](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.286)
 ### New
   * compiled with Xcode 10.2.1
