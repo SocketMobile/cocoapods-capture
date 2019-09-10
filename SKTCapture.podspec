@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.version      = "1.1.296"
   # s.module_name  = "SocketMobile"
   s.summary      = "Capture SDK Swift for Socket Mobile wireless devices."
-  s.homepage     = "http://www.socketmobile.com"
+  s.homepage     = "https://www.socketmobile.com"
   s.license      = { :type => "COMMERCIAL", :file => "LICENSE" }
   s.author       = { "Socket" => "developers@socketmobile.com" }
-  s.documentation_url   = "http://docs.socketmobile.com/capture/ios/en/latest/"
+  s.documentation_url   = "https://docs.socketmobile.com/capture/ios/en/latest/"
   s.platform     = :ios, "8.0"
   s.source       = {
       :git => "https://github.com/SocketMobile/cocoapods-capture.git",
