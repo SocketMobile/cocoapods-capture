@@ -39,6 +39,7 @@ typedef void* SKTHandle;
 /** @brief should be set to the application AppKey: MCwCFBsP4MDTmN+fBzsWLxYBsBmGalwTAhR56dMFyCEdzlxKd1zNWfdACsXjuA== */
 @property (strong) NSString* AppKey;
 
+-(bool) verifyWithBundleId:(NSString*) bundleId;
 @end
 
 @class SKTCapture;

@@ -29,7 +29,6 @@
   That's why it is recommended to use the SKTSUCCESS macro to check for
   success.
 */
-
 typedef NS_ENUM(NSInteger, SKTCaptureErrors) {
 	/**
 	The wait timed out

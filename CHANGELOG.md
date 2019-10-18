@@ -1,6 +1,11 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.1.349](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.349)
+### New
+  * Added new DotCode symbology
+  * Converted symbologies to dataSources to accomodate D600
+
 ## [Version 1.1.296](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.296)
 ### New
   * n/a
