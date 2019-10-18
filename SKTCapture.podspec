@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SKTCapture"
-  s.version      = "1.1.297"
+  s.version      = "1.1.298"
   # s.module_name  = "SocketMobile"
   s.summary      = "Capture SDK Swift for Socket Mobile wireless devices."
   s.homepage     = "https://www.socketmobile.com"
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.swift_version = '4.0'
   s.source       = {
       :git => "https://github.com/SocketMobile/cocoapods-capture.git",
-      :tag => "1.1.297"
+      :tag => "1.1.298"
   }
   s.ios.deployment_target = "9.1"
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0', 'SWIFT_OPTIMIZATION_LEVEL' => '-Owholemodule' }
