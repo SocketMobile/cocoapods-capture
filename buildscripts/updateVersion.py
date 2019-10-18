@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 import re
 import os
@@ -6,28 +5,28 @@ import glob
 import time
 import subprocess
 
-def updateVersionFiles(files, currentVersion, newVersion):
+def updateVersionFiles(files, newVersion, versionPrefix):
     year = time.strftime('%Y')
-    regexVersion = currentVersion
-    regexYear = '\d+ Socket Mobile, Inc.'
+    regexVersion = versionPrefix + '\d*\.\d*\.\d*'
+    regexYear = ' \d+ Socket Mobile, Inc.'
     for file in files:
         print 'updating the version in the ' + file + ' to ' + newVersion
         with open(file, 'r') as src:
             trg = open(file + '-new', 'w')
             lines = src.readlines()
             for line in lines:
-                line = re.sub(regexVersion, newVersion, line)
-                line = re.sub(regexYear, year + ' Socket Mobile, Inc.', line)
+                line = re.sub(regexVersion, versionPrefix + newVersion, line)
+                line = re.sub(regexYear, ' ' + year + ' Socket Mobile, Inc.', line)
                 trg.write(line)
             trg.close()
         os.remove(file)
         os.rename(file + '-new', file)
 
-def updateFiles(targetDirectory, currentVersion, newVersion):
-    files = glob.glob(targetDirectory + '/*.txt')
-    updateVersionFiles(files, currentVersion, newVersion)
+def updateFiles(targetDirectory, newVersion):
+    files = glob.glob(targetDirectory + '/README.md')
+    updateVersionFiles(files, newVersion, 'Version ')
     files = glob.glob(targetDirectory + '/*.podspec')
-    updateVersionFiles(files, currentVersion, newVersion)
+    updateVersionFiles(files, newVersion, '')
 
 def getCurrentDir():
     nbParam = len(sys.argv)
@@ -53,11 +52,7 @@ def getFullVersion(directory):
     version = version.splitlines()[0]
     version = version.split('-')
     subversion = version[0].split('.')
-    lastNumber = version[1]
-    if len(subversion) == 3:
-        lastNumber = subversion[2]
-    currentVersion = subversion[0] + '.' + subversion[1] + '.' + lastNumber
-    version = subversion[0] + '.' + subversion[1] + '.' + str(int(lastNumber) + 1)
+    version = subversion[0] + '.' + subversion[1] + '.' + str(int(version[1]) + 1)
     version = version.split('.');
     finalVersion = ''
     for n in range(3):
@@ -67,7 +62,7 @@ def getFullVersion(directory):
 
     os.chdir(currentDir)
     print 'full version: ' + finalVersion +' '+directory
-    return currentVersion, finalVersion
+    return finalVersion
 
 def commitModifications(version):
     comment = 'update to version ' + version
@@ -79,9 +74,14 @@ def tagSourceControl(version):
     output = subprocess.check_output(['git','tag', '-a', version, '-m', 'update version'])
 
 def main():
+    if (len(sys.argv) != 2):
+        print 'should have the new version as argument:'
+        print 'example: python updateVersion.py 1.0.28'
+        return
+    newVersion = sys.argv[1]
     target = getCurrentDir()
-    currentVersion, newVersion = getFullVersion(target)
-    updateFiles(target + '/..', currentVersion, newVersion)
+    # newVersion = getFullVersion(target)
+    updateFiles(target + '/..', newVersion)
     commitModifications(newVersion)
     tagSourceControl(newVersion)
 
