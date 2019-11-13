@@ -1,6 +1,9 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
-
+## [Version 1.1.356](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.356)
+### Bug fixes
+  * Fixed bug with switching the RFID data format between Tag-Type-And-ID and Tag-Type-And-Data
+  
 ## [Version 1.1.351](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.351)
 ### New
   * Added new DotCode symbology
