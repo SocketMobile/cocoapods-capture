@@ -1,6 +1,6 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
-## [Version 1.1.356](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.356)
+## [Version 1.1.372](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.372)
 ### New
 * Now compatibile with iOS 13.0
 
