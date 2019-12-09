@@ -6,7 +6,6 @@ This file tracks released versions with the changes made to this project.
 
 ### Bug fixes
 * Fixed bug where extending the CaptureHelperAllDelegate does not include the  CaptureHelperDeviceManagerPresenceDelegate, which is necessary for connecting Socket Mobile RFID reader/writers.
-  66ef3b04 · -Added CaptureHelperDeviceManagerPresenceDelegate
 ## [Version 1.1.372](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.372)
 ### New
 * Now compatibile with iOS 13.0
