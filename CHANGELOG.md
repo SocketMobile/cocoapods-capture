@@ -1,5 +1,12 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
+## [Version 1.1.380](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.380)
+### New
+* Added an optional mainBundle parameter to check the application contains the "com.socketmobile.chs" string in its Info.plist. This is necessary for connecting to Socket Mobile barcode readers.
+
+### Bug fixes
+* Fixed bug where extending the CaptureHelperAllDelegate does not include the  CaptureHelperDeviceManagerPresenceDelegate, which is necessary for connecting Socket Mobile RFID reader/writers.
+  66ef3b04 · -Added CaptureHelperDeviceManagerPresenceDelegate
 ## [Version 1.1.372](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.372)
 ### New
 * Now compatibile with iOS 13.0

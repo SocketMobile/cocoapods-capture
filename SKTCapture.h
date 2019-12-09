@@ -39,6 +39,9 @@ typedef void* SKTHandle;
 /** @brief should be set to the application AppKey: MCwCFBsP4MDTmN+fBzsWLxYBsBmGalwTAhR56dMFyCEdzlxKd1zNWfdACsXjuA== */
 @property (strong) NSString* AppKey;
 
+/** @brief should be set to the application's primary bundle. */
+@property (strong) NSBundle* mainBundle;
+
 -(bool) verifyWithBundleId:(NSString*) bundleId;
 @end
 
@@ -161,6 +164,12 @@ typedef void* SKTHandle;
  @param handle contains the handle from the object sending the event.
  */
 -(void)didReceiveEvent:(SKTCaptureEvent *)event withHandle:(SKTHandle)handle withResult:(SKTResult)result;
+
+
+/**
+  @brief Verifies if the the application's Bundle Info.plist contains "com.socketmobile.chs" in its "UISupportedExternalAccessoryProtocols" array.
+ */
+-(bool)canConnectToBarcodeScannersWithBundle:(NSBundle *) bundle;
 @end
 
 #pragma mark - Helper
