@@ -874,7 +874,7 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                 
             
                 if let bundle = appInfo.mainBundle {
-                    if self.capture?.canConnectToBarcodeScanners(with: bundle) == false {
+                    if SKTCapture.canConnectToBarcodeScanners(with: bundle) == false {
                        print("\nIf your application uses a Socket Mobile barcode scanner, you need to add a \"UISupportedExternalAccessoryProtocols\" Array to your Info.plist with \"com.socketmobile.chs\" as an Item in that Array. Otherwise the scanner won't connect to the application.\n")
                    }
                 }

@@ -1,5 +1,9 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
+## [Version 1.1.384](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.384)
+### Bug fixes
+  * Used static function to avoid possible retain cycle.
+  
 ## [Version 1.1.380](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.380)
 ### New
 * Added an optional mainBundle parameter to check the application contains the "com.socketmobile.chs" string in its Info.plist. This is necessary for connecting to Socket Mobile barcode readers.

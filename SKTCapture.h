@@ -169,7 +169,7 @@ typedef void* SKTHandle;
 /**
   @brief Verifies if the the application's Bundle Info.plist contains "com.socketmobile.chs" in its "UISupportedExternalAccessoryProtocols" array.
  */
--(bool)canConnectToBarcodeScannersWithBundle:(NSBundle *) bundle;
++(bool)canConnectToBarcodeScannersWithBundle:(NSBundle *) bundle;
 @end
 
 #pragma mark - Helper

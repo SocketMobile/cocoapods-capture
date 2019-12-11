@@ -1,4 +1,4 @@
-# Capture SDK Version 1.1.380
+# Capture SDK Version 1.1.384
 
 Socket Mobile is a leading innovator of data capture and delivery solutions for
 enhanced productivity.
