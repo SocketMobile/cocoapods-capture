@@ -1,5 +1,14 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
+## [Version 1.2.9](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.9)
+### New
+  * Added support for new S550 line of RFID Readers
+  * - Includes reading the tag ID of an RFID card
+  * - Reading the friendly name
+  * - Reading the battery level
+  * - Reading the bluetooth address
+  * - Reading the firmware version
+
 ## [Version 1.1.384](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.1.384)
 ### Bug fixes
   * Used static function to avoid possible retain cycle.
