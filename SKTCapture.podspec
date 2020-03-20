@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.1"
   s.swift_version = '4.0'
   s.source       = {
-      :git => "ssh://git@git.socketmobile.com/scanning/cocoapods-capture.git",
+      :git => "https://github.com/SocketMobile/cocoapods-capture.git",
       :tag => "1.2.9"
   }
   s.ios.deployment_target = "9.1"
