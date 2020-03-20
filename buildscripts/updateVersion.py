@@ -22,11 +22,27 @@ def updateVersionFiles(files, newVersion, versionPrefix):
         os.remove(file)
         os.rename(file + '-new', file)
 
+def updateLinkFiles(files):
+    regexLink = re.compile(r'(.*git => ")(ssh:\/\/[A-Za-z@\.-]*\/scanning)(\/.*)')
+    for file in files:
+        print 'updating the link to the repo for ' + file
+        with open(file, 'r') as src:
+            trg = open(file + '-new', 'w')
+            lines = src.readlines()
+            for line in lines:
+                line = regexLink.sub(r"\1https://github.com/SocketMobile\3", line)
+                trg.write(line)
+            trg.close()
+        os.remove(file)
+        os.rename(file + '-new', file)
+
+
 def updateFiles(targetDirectory, newVersion):
     files = glob.glob(targetDirectory + '/README.md')
     updateVersionFiles(files, newVersion, 'Version ')
     files = glob.glob(targetDirectory + '/*.podspec')
     updateVersionFiles(files, newVersion, '')
+    updateLinkFiles(files)
 
 def getCurrentDir():
     nbParam = len(sys.argv)
