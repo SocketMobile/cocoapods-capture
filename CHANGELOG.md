@@ -1,5 +1,9 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
+## [Version 1.2.36](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.36)
+### Bug Fixes
+  * Fixed issue with different decoded data format for S550
+  
 ## [Version 1.2.9](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.9)
 ### New
   * Added support for new S550 line of RFID Readers
