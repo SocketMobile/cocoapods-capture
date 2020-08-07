@@ -917,8 +917,10 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     ///   - capture: reference of the capture the event refers to
     ///   - result: result code of the event
     public func didReceive(_ event: SKTCaptureEvent!, for capture: SKTCapture!, withResult result: SKTResult) {
-        switch event.id {
-        case SKTCaptureEventID.error:
+        guard let event = event else { return }
+
+        // Safely catch an error if it occurs
+        if event.id == SKTCaptureEventID.error {
             if let delegate = currentDelegate as? CaptureHelperErrorDelegate {
                 if let dq = self.dispatchQueue {
                     dq.async{
@@ -928,7 +930,12 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
                     delegate.didReceiveError(result)
                 }
             }
-            break
+            return
+        }
+
+        // Wrap capture to ensure it exists
+        guard let capture = capture else { return }
+        switch event.id {
         case SKTCaptureEventID.deviceArrival:
             if let deviceInfo = event.data?.deviceInfo {
                 capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in

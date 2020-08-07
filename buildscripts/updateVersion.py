@@ -35,8 +35,8 @@ def updateLinkFiles(files):
             trg.close()
         os.remove(file)
         os.rename(file + '-new', file)
-
-
+        
+        
 def updateFiles(targetDirectory, newVersion):
     files = glob.glob(targetDirectory + '/README.md')
     updateVersionFiles(files, newVersion, 'Version ')
