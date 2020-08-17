@@ -1,6 +1,10 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.2.53](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.53)
+### Bug Fixes
+* Fix the occasional error -55 during Capture open
+
 ## [Version 1.2.40](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.40)
 ### Bug Fixes
 * Prevent forcibly unwrapping nil arguments in `didReceive(_:for:withResult)` function
