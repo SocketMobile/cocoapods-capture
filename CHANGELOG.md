@@ -1,6 +1,16 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.2.187](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.187)
+
+### New
+* XCFramework release (requires Cocoapods version 10.0 or higher)
+
+* Drop support for iOS9.1, minimum target version is iOS10.0
+
+### Bug Fixes
+* Fix the large payload read with S550
+
 ## [Version 1.2.53](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.53)
 ### Bug Fixes
 * Fix the occasional error -55 during Capture open
