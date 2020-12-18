@@ -1,4 +1,4 @@
-# Capture SDK Version 1.2.187
+# Capture SDK Version 1.3.3
 
 Socket Mobile is a leading innovator of data capture and delivery solutions for
 enhanced productivity.
@@ -22,7 +22,7 @@ More documentation can be found [here](https://docs.socketmobile.com/capture/ios
 
 ## Table of Contents
 
-- [Capture SDK Version 1.2.187](#capture-sdk-version-1253)
+- [Capture SDK Version 1.3.3](#capture-sdk-version-1253)
   - [Table of Contents](#table-of-contents)
   - [Quick install notes](#quick-install-notes)
   - [Capture usage](#capture-usage)
