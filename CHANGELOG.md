@@ -1,6 +1,15 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.3.28](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.28)
+
+### New
+* Added support for multi BLE connections
+
+### Bug Fixes
+* Fix the BLE device discovery close Device Manager
+
+
 ## [Version 1.2.187](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.2.187)
 
 ### New
