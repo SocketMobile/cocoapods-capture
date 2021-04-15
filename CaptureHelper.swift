@@ -733,8 +733,8 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
 
     fileprivate var delegatesStack = Array<CaptureHelperDelegate>()
     fileprivate var currentDelegate : CaptureHelperDelegate?
-    fileprivate var devices = Dictionary<SKTCapture, CaptureHelperDevice>()
-    fileprivate var deviceManagers = Dictionary<SKTCapture, CaptureHelperDeviceManager>()
+    fileprivate var devices = Dictionary<String, CaptureHelperDevice>()
+    fileprivate var deviceManagers = Dictionary<String, CaptureHelperDeviceManager>()
 
     /// can store any object that can be used in an extension
     public var extensionProperties : Dictionary<String, Any>
@@ -937,181 +937,269 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
         guard let capture = capture else { return }
         switch event.id {
         case SKTCaptureEventID.deviceArrival:
-            if let deviceInfo = event.data?.deviceInfo {
-                capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
-                    if (result == SKTCaptureErrors.E_NOERROR){
-                        if let dev = device {
-                            let newDevice = CaptureHelperDevice(deviceInfo: deviceInfo, capture: dev)
-                            self.devices[dev] = newDevice
-                            newDevice.dispatchQueue = self.dispatchQueue
-                            if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
-                                if let dq = self.dispatchQueue {
-                                    dq.async{
-                                        delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
-                                    }
-                                } else {
-                                    delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
-                                }
-                            }
-                        } else {
-                            // trace
-                        }
-                    }
-                })
-            }
+            handleDeviceArrival(capture: capture, event: event, result: result)
             break
         case SKTCaptureEventID.deviceRemoval:
-            if let deviceFound = self.devices[capture] {
-                self.devices.removeValue(forKey: capture)
-                if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
-                    if let dq = self.dispatchQueue {
-                        dq.async{
-                            delegate.didNotifyRemovalForDevice(deviceFound, withResult: result)
-                        }
-                    } else {
-                        delegate.didNotifyRemovalForDevice(deviceFound, withResult: result)
-                    }
-                }
-                capture.close(completionHandler: { (result) in
-                    if (result != SKTCaptureErrors.E_NOERROR) {
-                        print("closing the device returns \(result.rawValue)")
-                    }
-                })
-            }
+            handleDeviceRemoval(capture: capture, event: event, result: result)
             break
         case SKTCaptureEventID.deviceManagerArrival:
-            if let deviceInfo = event.data?.deviceInfo {
-                capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
-                    if (result == SKTCaptureErrors.E_NOERROR){
-                        if let dev = device {
-                            let newDevice = CaptureHelperDeviceManager(deviceInfo: deviceInfo, capture: dev)
-                            self.deviceManagers[dev] = newDevice
-                            newDevice.dispatchQueue = self.dispatchQueue
-                            if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
-                                if let dq = self.dispatchQueue {
-                                    dq.async{
-                                        delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
-                                    }
-                                } else {
-                                    delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
-                                }
-                            }
-                        } else {
-                            // trace
-                        }
-                    }
-                })
-            }
+            handleDeviceManagerArrival(capture: capture, event: event, result: result)
             break
         case SKTCaptureEventID.deviceManagerRemoval:
-            if let deviceFound = self.deviceManagers[capture] {
-                if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
-                    if let dq = self.dispatchQueue {
-                        dq.async{
-                            delegate.didNotifyRemovalForDeviceManager(deviceFound, withResult: result)
-                        }
-                    } else {
-                        delegate.didNotifyRemovalForDeviceManager(deviceFound, withResult: result)
-                    }
-                }
-                self.deviceManagers.removeValue(forKey: capture)
-                capture.close(completionHandler: { (result) in
-                    if (result != SKTCaptureErrors.E_NOERROR) {
-                        print("closing the device manager returns \(result.rawValue)")
-                    }
-                })
-            }
+            handleDeviceManagerRemoval(capture: capture, event: event, result: result)
             break
         case SKTCaptureEventID.deviceDiscovered:
-            if let deviceFound = self.deviceManagers[capture] {
-                if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerDiscoveryDelegate {
-                    if let dq = self.dispatchQueue {
-                        dq.async{
-                            delegate.didDiscoverDevice((event.data?.stringValue)!, fromDeviceManager: deviceFound)
-                        }
-                    } else {
-                        delegate.didDiscoverDevice((event.data?.stringValue)!, fromDeviceManager: deviceFound)
-                    }
-                }
-            }
+            handleDeviceDiscovered(capture: capture, event: event)
             break;
         case SKTCaptureEventID.discoveryEnd:
-            if let deviceFound = self.deviceManagers[capture] {
-                if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerDiscoveryDelegate {
-                    if let dq = self.dispatchQueue {
-                        dq.async{
-                            delegate.didEndDiscoveryWithResult(result, fromDeviceManager: deviceFound)
-                        }
-                    } else {
-                        delegate.didEndDiscoveryWithResult(result, fromDeviceManager: deviceFound)
-                    }
-                }
-            }
+            handleDeviceDiscoveryDidEnd(capture: capture, event: event, result: result)
             break;
         case SKTCaptureEventID.decodedData:
-            if let deviceFound = self.devices[capture] {
-                if let delegate = self.currentDelegate as? CaptureHelperDeviceDecodedDataDelegate {
-                    if let dq = self.dispatchQueue {
-                        dq.async{
-                            delegate.didReceiveDecodedData(event.data?.decodedData, fromDevice: deviceFound, withResult: result)
-                        }
-                    } else {
-                        delegate.didReceiveDecodedData(event.data?.decodedData, fromDevice: deviceFound, withResult: result)
-                    }
-                }
-            }
+            handleDeviceDidReceiveDecodedData(capture: capture, event: event, result: result)
             break
         case SKTCaptureEventID.batteryLevel:
-            if let deviceFound = self.devices[capture] {
-                if let delegate = currentDelegate as? CaptureHelperDevicePowerDelegate {
-                    if let value = event.data?.uLongValue {
-                        if let dq = self.dispatchQueue {
-                            dq.async{
-                                delegate.didChangeBatteryLevel(Int(value), forDevice: deviceFound)
-                            }
-                        } else {
-                            delegate.didChangeBatteryLevel(Int(value), forDevice: deviceFound)
-                        }
-                    }
-                }
-            }
+            handleDeviceBatteryLevelDidChange(capture: capture, event: event)
             break
         case SKTCaptureEventID.power:
-            if let deviceFound = self.devices[capture] {
-                if let delegate = currentDelegate as? CaptureHelperDevicePowerDelegate {
-                    if let value = event.data?.uLongValue {
-                        if let dq = self.dispatchQueue {
-                            dq.async{
-                                delegate.didChangePowerState(SKTCapturePowerState(rawValue: Int(value))!, forDevice: deviceFound)
-                            }
-                        } else {
-                            delegate.didChangePowerState(SKTCapturePowerState(rawValue: Int(value))!, forDevice: deviceFound)
-                        }
-                    }
-                }
-            }
+            handleDevicePowerStateDidChange(capture: capture, event: event)
             break
         case SKTCaptureEventID.buttons:
-            if let deviceFound = self.devices[capture] {
-                if let delegate = currentDelegate as? CaptureHelperDeviceButtonsDelegate {
-                    if let value = event.data?.byteValue {
-                        let finalValue = SKTCaptureButtonsState(rawValue: Int(value))
-                        if let dq = self.dispatchQueue {
-                            dq.async{
-                                delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
-                            }
-                        } else {
-                            delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
-                        }
-                    }
-                }
-            }
+            handleDeviceButtonsStateDidChange(capture: capture, event: event)
             break;
         default: break
             // not much to do
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Switch case functions
+    
+    private func handleDeviceArrival(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        if let deviceInfo = event.data?.deviceInfo {
+            capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
+                if (result == SKTCaptureErrors.E_NOERROR){
+                    guard let device = device, let deviceGuid = device.guid else {
+                        // trace
+                        return
+                    }
+                    let newDevice = CaptureHelperDevice(deviceInfo: deviceInfo, capture: device)
+                    self.devices[deviceGuid] = newDevice
+                    newDevice.dispatchQueue = self.dispatchQueue
+                    if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
+                        if let dq = self.dispatchQueue {
+                            dq.async {
+                                delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
+                            }
+                        } else {
+                            delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    private func handleDeviceRemoval(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.devices[deviceGuid] {
+            self.devices.removeValue(forKey: deviceGuid)
+            if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
+                if let dq = self.dispatchQueue {
+                    dq.async{
+                        delegate.didNotifyRemovalForDevice(deviceFound, withResult: result)
+                    }
+                } else {
+                    delegate.didNotifyRemovalForDevice(deviceFound, withResult: result)
+                }
+            }
+            capture.close(completionHandler: { (result) in
+                if (result != SKTCaptureErrors.E_NOERROR) {
+                    print("closing the device returns \(result.rawValue)")
+                }
+            })
+        }
+    }
+    
+    private func handleDeviceManagerArrival(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        if let deviceInfo = event.data?.deviceInfo {
+            capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
+                if (result == SKTCaptureErrors.E_NOERROR){
+                    guard let device = device, let deviceGuid = device.guid else {
+                        // trace
+                        return
+                    }
+                    let newDevice = CaptureHelperDeviceManager(deviceInfo: deviceInfo, capture: device)
+                    self.deviceManagers[deviceGuid] = newDevice
+                    newDevice.dispatchQueue = self.dispatchQueue
+                    if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
+                        if let dq = self.dispatchQueue {
+                            dq.async {
+                                delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
+                            }
+                        } else {
+                            delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    private func handleDeviceManagerRemoval(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.deviceManagers[deviceGuid] {
+            if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
+                if let dq = self.dispatchQueue {
+                    dq.async {
+                        delegate.didNotifyRemovalForDeviceManager(deviceFound, withResult: result)
+                    }
+                } else {
+                    delegate.didNotifyRemovalForDeviceManager(deviceFound, withResult: result)
+                }
+            }
+            self.deviceManagers.removeValue(forKey: deviceGuid)
+            capture.close(completionHandler: { (result) in
+                if (result != SKTCaptureErrors.E_NOERROR) {
+                    print("closing the device manager returns \(result.rawValue)")
+                }
+            })
+        }
+    }
+    
+    private func handleDeviceDiscovered(capture: SKTCapture, event: SKTCaptureEvent) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.deviceManagers[deviceGuid] {
+            if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerDiscoveryDelegate {
+                if let dq = self.dispatchQueue {
+                    dq.async {
+                        delegate.didDiscoverDevice((event.data?.stringValue)!, fromDeviceManager: deviceFound)
+                    }
+                } else {
+                    delegate.didDiscoverDevice((event.data?.stringValue)!, fromDeviceManager: deviceFound)
+                }
+            }
+        }
+    }
+    
+    private func handleDeviceDiscoveryDidEnd(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.deviceManagers[deviceGuid] {
+            if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerDiscoveryDelegate {
+                if let dq = self.dispatchQueue {
+                    dq.async {
+                        delegate.didEndDiscoveryWithResult(result, fromDeviceManager: deviceFound)
+                    }
+                } else {
+                    delegate.didEndDiscoveryWithResult(result, fromDeviceManager: deviceFound)
+                }
+            }
+        }
+    }
+    
+    private func handleDeviceDidReceiveDecodedData(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.devices[deviceGuid] {
+            if let delegate = self.currentDelegate as? CaptureHelperDeviceDecodedDataDelegate {
+                if let dq = self.dispatchQueue {
+                    dq.async {
+                        delegate.didReceiveDecodedData(event.data?.decodedData, fromDevice: deviceFound, withResult: result)
+                    }
+                } else {
+                    delegate.didReceiveDecodedData(event.data?.decodedData, fromDevice: deviceFound, withResult: result)
+                }
+            }
+        }
+    }
+    
+    private func handleDeviceBatteryLevelDidChange(capture: SKTCapture, event: SKTCaptureEvent) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.devices[deviceGuid] {
+            if let delegate = currentDelegate as? CaptureHelperDevicePowerDelegate {
+                if let value = event.data?.uLongValue {
+                    if let dq = self.dispatchQueue {
+                        dq.async {
+                            delegate.didChangeBatteryLevel(Int(value), forDevice: deviceFound)
+                        }
+                    } else {
+                        delegate.didChangeBatteryLevel(Int(value), forDevice: deviceFound)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func handleDevicePowerStateDidChange(capture: SKTCapture, event: SKTCaptureEvent) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.devices[deviceGuid] {
+            if let delegate = currentDelegate as? CaptureHelperDevicePowerDelegate {
+                if let value = event.data?.uLongValue {
+                    if let dq = self.dispatchQueue {
+                        dq.async {
+                            delegate.didChangePowerState(SKTCapturePowerState(rawValue: Int(value))!, forDevice: deviceFound)
+                        }
+                    } else {
+                        delegate.didChangePowerState(SKTCapturePowerState(rawValue: Int(value))!, forDevice: deviceFound)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func handleDeviceButtonsStateDidChange(capture: SKTCapture, event: SKTCaptureEvent) {
+        guard let deviceGuid = capture.guid else {
+            // trace
+            return
+        }
+        if let deviceFound = self.devices[deviceGuid] {
+            if let delegate = currentDelegate as? CaptureHelperDeviceButtonsDelegate {
+                if let value = event.data?.byteValue {
+                    let finalValue = SKTCaptureButtonsState(rawValue: Int(value))
+                    if let dq = self.dispatchQueue {
+                        dq.async {
+                            delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
+                        }
+                    } else {
+                        delegate.didChangeButtonsState(finalValue, forDevice: deviceFound)
+                    }
+                }
+            }
+        }
+    }
 
     /// retrieve the Capture version
     ///
