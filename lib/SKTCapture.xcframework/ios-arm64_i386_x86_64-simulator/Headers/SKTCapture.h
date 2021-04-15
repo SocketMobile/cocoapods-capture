@@ -100,6 +100,10 @@ typedef void* SKTHandle;
 
  */
 @interface SKTCapture : NSObject
+
+
+@property (nonatomic, strong, readonly) NSString* _Nullable  guid;// guid of the device, this SKTCapture object is created upon device arrival
+
 /**
  @brief initialize Capture object without delegate.
  */
