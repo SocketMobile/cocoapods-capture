@@ -989,28 +989,31 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     // MARK: - Switch case functions
     
     private func handleDeviceArrival(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
-        if let deviceInfo = event.data?.deviceInfo {
-            capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
-                if (result == SKTCaptureErrors.E_NOERROR){
-                    guard let device = device, let deviceGuid = device.guid else {
-                        // trace
-                        return
-                    }
-                    let newDevice = CaptureHelperDevice(deviceInfo: deviceInfo, capture: device)
-                    self.devices[deviceGuid] = newDevice
-                    newDevice.dispatchQueue = self.dispatchQueue
-                    if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
-                        if let dq = self.dispatchQueue {
-                            dq.async {
-                                delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
-                            }
-                        } else {
+        guard let deviceInfo = event.data?.deviceInfo, let deviceInfoGuid = deviceInfo.guid else {
+            // trace
+            return
+        }
+            
+        capture.openDevice(withGuid: deviceInfoGuid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
+            if (result == SKTCaptureErrors.E_NOERROR){
+                guard let device = device, let deviceGuid = device.guid else {
+                    // trace
+                    return
+                }
+                let newDevice = CaptureHelperDevice(deviceInfo: deviceInfo, capture: device)
+                self.devices[deviceGuid] = newDevice
+                newDevice.dispatchQueue = self.dispatchQueue
+                if let delegate = self.currentDelegate as? CaptureHelperDevicePresenceDelegate {
+                    if let dq = self.dispatchQueue {
+                        dq.async {
                             delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
                         }
+                    } else {
+                        delegate.didNotifyArrivalForDevice(newDevice, withResult: result)
                     }
                 }
-            })
-        }
+            }
+        })
     }
     
     private func handleDeviceRemoval(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
@@ -1038,28 +1041,31 @@ public class CaptureHelper : NSObject, SKTCaptureDelegate {
     }
     
     private func handleDeviceManagerArrival(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {
-        if let deviceInfo = event.data?.deviceInfo {
-            capture.openDevice(withGuid: deviceInfo.guid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
-                if (result == SKTCaptureErrors.E_NOERROR){
-                    guard let device = device, let deviceGuid = device.guid else {
-                        // trace
-                        return
-                    }
-                    let newDevice = CaptureHelperDeviceManager(deviceInfo: deviceInfo, capture: device)
-                    self.deviceManagers[deviceGuid] = newDevice
-                    newDevice.dispatchQueue = self.dispatchQueue
-                    if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
-                        if let dq = self.dispatchQueue {
-                            dq.async {
-                                delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
-                            }
-                        } else {
+        guard let deviceInfo = event.data?.deviceInfo, let deviceInfoGuid = deviceInfo.guid else {
+            // trace
+            return
+        }
+        
+        capture.openDevice(withGuid: deviceInfoGuid, completionHandler: {(result: SKTResult, device: SKTCapture?)->Void in
+            if (result == SKTCaptureErrors.E_NOERROR){
+                guard let device = device, let deviceGuid = device.guid else {
+                    // trace
+                    return
+                }
+                let newDevice = CaptureHelperDeviceManager(deviceInfo: deviceInfo, capture: device)
+                self.deviceManagers[deviceGuid] = newDevice
+                newDevice.dispatchQueue = self.dispatchQueue
+                if let delegate = self.currentDelegate as? CaptureHelperDeviceManagerPresenceDelegate {
+                    if let dq = self.dispatchQueue {
+                        dq.async {
                             delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
                         }
+                    } else {
+                        delegate.didNotifyArrivalForDeviceManager(newDevice, withResult: result)
                     }
                 }
-            })
-        }
+            }
+        })
     }
     
     private func handleDeviceManagerRemoval(capture: SKTCapture, event: SKTCaptureEvent, result: SKTResult) {

@@ -31,18 +31,18 @@ typedef void* SKTHandle;
 @interface SKTAppInfo : NSObject
 /** @brief should be set to the platform prefix followed by a colon and the app Bundle ID: example: "ios: com.mycompany.myapp"
 */
-@property (strong) NSString* AppID;
+@property (strong) NSString* _Nonnull AppID;
 
 /** @brief should be set to the Socket Mobile Developer ID: 07ef56c4-7acc-323b-7821-5c0ab2122243*/
-@property (strong) NSString* DeveloperID;
+@property (strong) NSString* _Nonnull DeveloperID;
 
 /** @brief should be set to the application AppKey: MCwCFBsP4MDTmN+fBzsWLxYBsBmGalwTAhR56dMFyCEdzlxKd1zNWfdACsXjuA== */
-@property (strong) NSString* AppKey;
+@property (strong) NSString* _Nonnull AppKey;
 
 /** @brief should be set to the application's primary bundle. */
-@property (strong) NSBundle* mainBundle;
+@property (strong) NSBundle* _Nullable mainBundle;
 
--(bool) verifyWithBundleId:(NSString*) bundleId;
+-(bool) verifyWithBundleId:(NSString* _Nonnull) bundleId;
 @end
 
 @class SKTCapture;
@@ -61,7 +61,7 @@ typedef void* SKTHandle;
  @param capture contains a reference to the Capture object for which the event
  @param result contains the result of receiving this event
  */
--(void) didReceiveEvent:(SKTCaptureEvent*) event forCapture:(SKTCapture*) capture withResult:(SKTResult) result;
+-(void) didReceiveEvent:(SKTCaptureEvent* _Nonnull) event forCapture:(SKTCapture* _Nonnull) capture withResult:(SKTResult) result;
 
 @end
 
@@ -107,7 +107,7 @@ typedef void* SKTHandle;
 /**
  @brief initialize Capture object without delegate.
  */
--(instancetype)init;
+-(nonnull instancetype)init;
 
 /**
  @brief initialize Capture object with delegate.
@@ -115,7 +115,7 @@ typedef void* SKTHandle;
  @return the capture instance.
  @remark this is the recommended method to initialize capture.
  */
--(instancetype)initWithDelegate:(id<SKTCaptureDelegate>) delegate;
+-(nonnull instancetype)initWithDelegate:(id<SKTCaptureDelegate> _Nullable) delegate;
 
 /**
  @brief change the capture delegate.
@@ -123,14 +123,14 @@ typedef void* SKTHandle;
 
  @remark it is safe to specify nil as delegate to ignore all capture events
  */
--(void)setDelegate:(id<SKTCaptureDelegate>) delegate;
+-(void)setDelegate:(id<SKTCaptureDelegate> _Nullable) delegate;
 
 /**
  @brief open the first instance of capture
  @param appInfo contains the application information to open capture
  @param block receives the result of opening capture
  */
--(void) openWithAppInfo:(SKTAppInfo*) appInfo completionHandler:(void(^)(SKTResult result)) block;
+-(void) openWithAppInfo:(SKTAppInfo* _Nonnull) appInfo completionHandler:(void(^_Nullable)(SKTResult result)) block;
 
 /**
  @brief open the device identified by the GUID
@@ -138,7 +138,7 @@ typedef void* SKTHandle;
  @param block receives the result of opening the device and a new capture instance reprensenting
  the device
  */
--(void) openDeviceWithGuid:(NSString*) guid completionHandler:(void(^)(SKTResult result, SKTCapture* deviceCapture)) block;
+-(void) openDeviceWithGuid:(NSString* _Nonnull) guid completionHandler:(void(^_Nullable)(SKTResult result, SKTCapture* _Nullable deviceCapture)) block;
 
 /**
  @brief close a capture instance. It could be the main capture object or a capture
@@ -146,7 +146,7 @@ typedef void* SKTHandle;
  the device from the iOS device.
  @param block contains the result of closing the capture instance.
  */
--(void) closeWithCompletionHandler:(void(^)(SKTResult result)) block;
+-(void) closeWithCompletionHandler:(void(^_Nullable)(SKTResult result)) block;
 
 /**
  @brief set a property and depending of the capture instance used it could be setting
@@ -154,26 +154,26 @@ typedef void* SKTHandle;
  @param property contains the property to set.
  @param block receives the result of setting the property.
  */
--(void) setProperty:(SKTCaptureProperty*) property completionHandler:(void(^)(SKTResult result, SKTCaptureProperty* complete)) block;
+-(void) setProperty:(SKTCaptureProperty*_Nonnull) property completionHandler:(void(^_Nullable)(SKTResult result, SKTCaptureProperty* _Nullable complete)) block;
 
 /**
  @brief get a property and depending of the capture instalce used it could be getting
         a property of a device or of the main capture object.
  */
--(void) getProperty:(SKTCaptureProperty*) property completionHandler:(void(^)(SKTResult result, SKTCaptureProperty* complete)) block;
+-(void) getProperty:(SKTCaptureProperty*_Nonnull) property completionHandler:(void(^_Nullable)(SKTResult result, SKTCaptureProperty* _Nullable complete)) block;
 
 /**
  @brief delegate for all the event received from capture low level interface.
  @param event contains the event information that is received from low level interface.
  @param handle contains the handle from the object sending the event.
  */
--(void)didReceiveEvent:(SKTCaptureEvent *)event withHandle:(SKTHandle)handle withResult:(SKTResult)result;
+-(void)didReceiveEvent:(SKTCaptureEvent * _Nonnull)event withHandle:(SKTHandle _Nonnull)handle withResult:(SKTResult)result;
 
 
 /**
   @brief Verifies if the the application's Bundle Info.plist contains "com.socketmobile.chs" in its "UISupportedExternalAccessoryProtocols" array.
  */
-+(bool)canConnectToBarcodeScannersWithBundle:(NSBundle *) bundle;
++(bool)canConnectToBarcodeScannersWithBundle:(NSBundle * _Nonnull) bundle;
 @end
 
 #pragma mark - Helper
