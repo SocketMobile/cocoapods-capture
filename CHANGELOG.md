@@ -1,10 +1,13 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
-## [Version 1.3.58](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.58)
+## [Version 1.3.60](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.6-)
 
 ### New
 * Added a `UITableView` to the lower portion of the SoftScan view to display previously scanned barcodes, etc.
+
+### Bug Fixes
+* Fixed warning about optionality mismatch for the `didReceive(_:for:withResult:) function`
 
 ## [Version 1.3.47](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.47)
 
