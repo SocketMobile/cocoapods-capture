@@ -16,7 +16,7 @@ Within 10 minutes the barcode scanning or RFID/NFC reading capability can be
 integrated into an application.
 
 The Capture SDK offers a built-in barcode scanner called Softscan, allowing to
-test and integrate the SDK even before getting a Socket Mobile scanner, using the exact same API.  
+test and integrate the SDK even before getting a Socket Mobile scanner, using the exact same API.
 
 More documentation can be found [here](https://docs.socketmobile.com/capture/ios/en/latest/ "Capture Documentation").
 
@@ -155,29 +155,29 @@ onDecodedData delegate.
 ### Summary for integrating Capture in Xcode project is a simple 6 steps process
 
 1. Add `pod 'SKTCapture', '~>1.2'` in the file Podfile located at the same
-level than the application .xcproj file.
-Make sure this file first line is giving the name of the application .xcproj
-file: `target 'myProject'`.
+   level than the application .xcproj file.
+   Make sure this file first line is giving the name of the application .xcproj
+   file: `target 'myProject'`.
 
 2. Install Capture CocoaPods in the project by using the terminal and typing the
-following command: `pod install` in the project's directory. Once the
-installation completes, use the application workspace in order to compile it
-with Capture.
+   following command: `pod install` in the project's directory. Once the
+   installation completes, use the application workspace in order to compile it
+   with Capture.
 
 3. Add `Import SKTCapture` in your application main controller.
 
 4. Derive your application main controller from one or more of the available
-CaptureHelper[xxxxx]Delegate protocols to receive the notifications the
-application is interested in.
+   CaptureHelper[xxxxx]Delegate protocols to receive the notifications the
+   application is interested in.
 
 5. In the appropriate controller function initializes CaptureHelper, by using
-the pushDelegate to specify your controller reference and by calling
-`CaptureHelper openWithAppInfo:completionHandler` method to start using
-Capture.
+   the pushDelegate to specify your controller reference and by calling
+   `CaptureHelper openWithAppInfo:completionHandler` method to start using
+   Capture.
 
 6. Add the implementation of the chosen CaptureHelper[xxxxx]Delegate protocols
-from which the controller derived to handle the various Capture asynchronous
-events.
+   from which the controller derived to handle the various Capture asynchronous
+   events.
 
 Example of Podfile for SingleEntry app:
 
@@ -405,3 +405,60 @@ If the motive of closing Capture is to not receive any decoded data from the
 device then the application delegate can simply be removed and the application
 will no longer receive any event from the scanner until it sets its delegate
 back again.
+
+---
+
+## Manual installation
+
+⚠️⚠️⚠️ Manual installation is not advised ⚠️⚠️⚠️
+
+Using the Pod is the good way to include the SDK within your app.
+However, you can follow those steps.
+
+1. Open the [cocoapods-capture pod repository](https://github.com/SocketMobile/cocoapods-capture) and chose the master branch
+
+2. Open your project
+
+3. In your project, make a CaptureAPI group folder (or any name you prefer)
+
+4. From cocoapods-capture pod, copy the following into your newly created CaptureAPI group:
+
+   - lib/SKTCapture.xcframework
+   - CaptureHelper.swift
+   - socketmobilepublickey.pem,
+   - softScanBeep.wav
+
+5. In Build Phases->Link Binary, add the following:
+
+   - SKTCapture.xcframework (if not added automatically)
+   - libc++.tbd
+   - libicucore.A.tbd
+   - CoreBluetooth.framework
+   - AVFoundation.framework
+   - AudioToolbox.framework
+   - ExternalAccessory.framework
+
+6. In Target->Build Settings, add to the `Header Search Paths` the headers path of the header files of the framework:
+
+   `relative/path/to/your/app/CaptureAPI/SKTCapture.xcframework/ios-arm64_i386_x86_64-simulator/Headers`
+
+7. Create and add a bridging header file name `yourApp-Bridging-Header.h` with the following line:
+
+   ```swift
+   #import "SKTCapture.h"
+   ```
+
+8. In Target->Build Settings, set the `Objective-C Bridging Header` key to:
+
+   ```swift
+   relative/path/to/yourApp-Bridging-Header.h
+   ```
+
+9. Add app the following key-value into the Info.plist of your project:
+   Add an item into the `Supported external accessory protocols` key: `com.socketmobile.chs`
+
+   ![Info.plist](Docs/Infoplist.jpg)
+
+10. Create your AppKey in your Socket Mobile developer account and apply the app info to your project following the previous instructions.
+
+11. Build and run with scanner connected in Application mode.
