@@ -1,6 +1,11 @@
 # Change Log
 This file tracks released versions with the changes made to this project.
 
+## [Version 1.3.133](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.133)
+
+### New
+* Added the simulator setting for M1 processor
+
 ## [Version 1.3.60](https://github.com/SocketMobile/cocoapods-capture/releases/tag/1.3.60)
 
 ### New
