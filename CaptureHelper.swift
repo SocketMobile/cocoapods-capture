@@ -14,12 +14,14 @@ import Foundation
  any delegate, it could be used for View Controllers
  that don't require any notification from Capture
  */
+@objc
 public protocol CaptureHelperDelegate {
 
 }
 
 /// Capture Helper protocol to comply in order to receive any error coming
 /// from Capture
+@objc
 public protocol CaptureHelperErrorDelegate: CaptureHelperDelegate {
 
     /// delegate called when an unexpected error arises
@@ -30,6 +32,7 @@ public protocol CaptureHelperErrorDelegate: CaptureHelperDelegate {
 
 
 /// Capture Helper protocol to comply in order to receive the device arrival, removal notifications
+@objc
 public protocol CaptureHelperDevicePresenceDelegate: CaptureHelperDelegate {
 
     /// delegate called when a device connects to the host
@@ -50,6 +53,7 @@ public protocol CaptureHelperDevicePresenceDelegate: CaptureHelperDelegate {
 }
 
 /// Capture Helper protocol to comply in order to receive the device manager arrival, removal notifications
+@objc
 public protocol CaptureHelperDeviceManagerPresenceDelegate: CaptureHelperDelegate {
 
     /// delegate called when a device manager connects to the host
@@ -70,6 +74,7 @@ public protocol CaptureHelperDeviceManagerPresenceDelegate: CaptureHelperDelegat
 }
 
 /// Capture Helper protocol to comply in order to receive the device manager discovery notifications
+@objc
 public protocol CaptureHelperDeviceManagerDiscoveryDelegate: CaptureHelperDelegate {
 
     /// delegate called when a device manager discovered a device
@@ -90,6 +95,7 @@ public protocol CaptureHelperDeviceManagerDiscoveryDelegate: CaptureHelperDelega
 }
 
 /// Capture Helper protocol to comply in order to receive the decoded data
+@objc
 public protocol CaptureHelperDeviceDecodedDataDelegate: CaptureHelperDelegate {
 
     /// delegate called when the decoded data is received from a device
@@ -104,6 +110,7 @@ public protocol CaptureHelperDeviceDecodedDataDelegate: CaptureHelperDelegate {
 }
 
 /// Capture Helper protocol to comply in order to receive the power and battery information
+@objc
 public protocol CaptureHelperDevicePowerDelegate: CaptureHelperDelegate {
 
 
@@ -125,6 +132,7 @@ public protocol CaptureHelperDevicePowerDelegate: CaptureHelperDelegate {
 
 
 /// Capture Helper protocol to comply in order to receive the buttons state
+@objc
 public protocol CaptureHelperDeviceButtonsDelegate : CaptureHelperDelegate {
 
     /// delegate called when the state of the device's buttons has changed
@@ -138,6 +146,7 @@ public protocol CaptureHelperDeviceButtonsDelegate : CaptureHelperDelegate {
 /// Capture Helper protocol to comply in order to receive all the Capture delegates
 /// use this protocol if the applications needs to handle all the notifications
 /// coming from Capture
+@objc
 public protocol CaptureHelperAllDelegate : CaptureHelperErrorDelegate, CaptureHelperDevicePresenceDelegate,
     CaptureHelperDevicePowerDelegate, CaptureHelperDeviceDecodedDataDelegate,
 CaptureHelperDeviceButtonsDelegate, CaptureHelperDeviceManagerPresenceDelegate {
@@ -149,6 +158,7 @@ CaptureHelperDeviceButtonsDelegate, CaptureHelperDeviceManagerPresenceDelegate {
 /**
  Capture Helper device, represents a device that is attached to Capture
  */
+@objcMembers
 public class CaptureHelperDevice : NSObject {
     fileprivate var capture : SKTCapture
 
@@ -249,12 +259,12 @@ public class CaptureHelperDevice : NSObject {
     /// notification.
     ///
     /// - Parameter completion: receiving the result and the device battery level if the result is successful
-    open func getBatteryLevelWithCompletionHandler(_ completion: @escaping(_ result: SKTResult, _ batteryLevel: UInt?)->Void){
+    open func getBatteryLevelWithCompletionHandler(_ completion: @escaping(_ result: SKTResult, _ batteryLevel: UInt)->Void){
         let property = SKTCaptureProperty()
         property.id = .batteryLevelDevice
         property.type = .none
         getProperty(property) { (result, propertyResult) in
-            completion(result, propertyResult?.uLongValue)
+            completion(result, propertyResult?.uLongValue ?? 0)
         }
     }
 
@@ -654,6 +664,8 @@ public class CaptureHelperDevice : NSObject {
 }
 
 // MARK: - Capture Helper Device Manager
+
+@objcMembers
 public class CaptureHelperDeviceManager : CaptureHelperDevice {
 
     open func startDiscoveryWithTimeout(_ timeout: NSInteger, withCompletionHandler completion: @escaping(_ result: SKTResult)->Void){
@@ -727,6 +739,7 @@ public class CaptureHelperDeviceManager : CaptureHelperDevice {
 /// 2- push a View Controller delegate reference that is compliant to a CaptureHelperDelegate protocol
 /// 3- fill a SKTAppInfo with developer ID, bundle ID and AppKey coming from Socket Mobile developer portal
 /// 4- open Capture with the SKTAppInfo instance
+@objc
 public class CaptureHelper : NSObject, SKTCaptureDelegate {
     private var capture : SKTCapture?
     private var openCount = 0;
